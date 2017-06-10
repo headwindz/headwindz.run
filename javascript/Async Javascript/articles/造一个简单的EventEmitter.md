@@ -117,3 +117,13 @@ function sumWithReduce(arr) {
     })
 }
 ```
+
+## Reference 
+
+* [Async Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+
+
+## Notice
+
+* 如果您觉得该[Repo](https://github.com/n0ruSh/the-art-of-reading/)让您有所收获，请点击右上角的「Star 」支持楼主。
+* 如果您想持续关注楼主的最新系列文章，请点击右上角的「Watch」订阅

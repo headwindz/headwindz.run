@@ -146,6 +146,10 @@ window.hasOwnProperty('null'); //false
 window.null //undefined
 ```
 
+## Reference
+
+[Javascript Enlightenment](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Javascript%20Enlightenment/JavaScript%20Enlightenment.pdf)
+
 ## Notice
 
 * 如果您觉得该[Repo](https://github.com/n0ruSh/the-art-of-reading/)让您有所收获，请点击右上角的「Star 」支持楼主。

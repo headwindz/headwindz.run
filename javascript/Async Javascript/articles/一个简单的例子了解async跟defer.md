@@ -1,6 +1,6 @@
 ## script标签
 
-当我们要在页面当中引入脚本的时候，一般用的是script标签(i.e. \<script\>)。很多人对script标签的第一印象就是- __阻塞__。在[High Performance Web Sites](https://github.com/n0ruSh/the-art-of-reading/blob/master/performance/High%20Performance%20Web%20Sites.pdf) 雅虎军规第6条中也提到尽量把script脚本放在body尾部。通过一个小例子我们看看script放在不同位置所产生的不同效果最后得出一丢丢优化结论。
+当我们要在页面当中引入脚本的时候，一般用的是script标签(i.e. \<script\>)。很多人对script标签的第一印象就是- __阻塞__。在[High Performance Web Sites](https://github.com/n0ruSh/the-art-of-reading/blob/master/performance/High%20Performance%20Web%20Sites/High%20Performance%20Web%20Sites.pdf) 雅虎军规第6条中也提到尽量把script脚本放在body尾部。通过一个小例子我们看看script放在不同位置所产生的不同效果最后得出一丢丢优化结论。
 
 首先明确一点，当在html页面里引入script时，浏览器做了2件事情：
 
@@ -201,4 +201,14 @@ script2.js:8 script2 finishes loading at 1496760315686
 
 [代码示例](https://github.com/n0ruSh/the-art-of-reading/tree/master/javascript/Async%20Javascript/defer-async)
 
-如果您觉得该[Repo](https://github.com/n0ruSh/the-art-of-reading/)让您有所收获，请点击右上角的「Star 」支持楼主。
+
+## Reference
+
+* [Async Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+
+* [High Performance Web Sites](https://github.com/n0ruSh/the-art-of-reading/blob/master/performance/High%20Performance%20Web%20Sites/High%20Performance%20Web%20Sites.pdf)
+
+## Notice
+
+* 如果您觉得该[Repo](https://github.com/n0ruSh/the-art-of-reading/)让您有所收获，请点击右上角的「Star 」支持楼主。
+* 如果您想持续关注楼主的最新系列文章，请点击右上角的「Watch」订阅

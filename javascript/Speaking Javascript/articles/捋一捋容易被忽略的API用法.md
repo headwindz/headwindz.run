@@ -28,8 +28,8 @@ console.log(now.getTimezoneOffset()); // -480
 let GMTDate = new Date(now.getTime() + now.getTimezoneOffset() * 60 * 1000);
 console.log(GMTDate.toISOString()); //2017-08-05T05:16:35.363Z
 //将本地时间换算成东3区时间
-let eastZone2Date = new Date(GMTDate.getTime() + 3 * 60 * 60 * 1000);
-console.log(eastZone2Date.toISOString()); //2017-08-05T08:20:55.235Z
+let eastZone3Date = new Date(GMTDate.getTime() + 3 * 60 * 60 * 1000);
+console.log(eastZone3Date.toISOString()); //2017-08-05T08:20:55.235Z
 ```
 
 # JSON

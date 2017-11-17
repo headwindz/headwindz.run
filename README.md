@@ -14,4 +14,4 @@
 * [异步知多少](https://github.com/n0ruSh/the-art-of-reading/issues/6)
 
 ## [Speaking Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Speaking%20JavaScript/Speaking%20JavaScript.pdf)
-* [捋一捋容易被忽略的API用法](https://github.com/n0ruSh/the-art-of-reading/issues/7)
+* [捋一捋容易被忽略的用法](https://github.com/n0ruSh/the-art-of-reading/issues/7)

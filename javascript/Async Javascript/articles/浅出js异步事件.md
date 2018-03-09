@@ -97,5 +97,5 @@ fs.readFile('abc.txt', function(err, data) {
 
 ## Notice
 
-* 如果您觉得该[Repo](https://github.com/n0ruSh/the-art-of-reading/)让您有所收获，请「Star 」支持楼主。
-* 如果您想持续关注楼主的最新系列文章，请「Watch」订阅
+* If you benefit from this [Repo](https://github.com/n0ruSh/the-art-of-reading/)，Please「Star 」to Support.
+* If you want to follow the latest news/articles for the series of reading notes, Please 「Watch」to Subscribe.

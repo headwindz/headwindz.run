@@ -243,13 +243,13 @@ hello
 
 ## Reference 
 
-* [Effective Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Effective%20Javascript/Effective%20JavaScript-68%20Specific%20Ways%20to%20Harness%20the%20Power%20of%20JavaScript.pdf)
+* [Effective JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Effective%20Javascript/Effective%20JavaScript-68%20Specific%20Ways%20to%20Harness%20the%20Power%20of%20JavaScript.pdf)
 
-## Code
+## Code Sample
 
-* [Effective Javacript folder](https://github.com/n0ruSh/the-art-of-reading/tree/master/javascript/Effective%20Javascript)
+* [Effective JavaSript Sample Code](https://github.com/n0ruSh/the-art-of-reading/tree/master/javascript/Effective%20Javascript)
 
 ## Notice
 
-* 如果您觉得该[Repo](https://github.com/n0ruSh/the-art-of-reading/)让您有所收获，请「Star 」支持楼主。
-* 如果您想持续关注楼主的最新系列文章，请「Watch」订阅
+* If you benefit from this [Repo](https://github.com/n0ruSh/the-art-of-reading/)，Please「Star 」to Support.
+* If you want to follow the latest news/articles for the series of reading notes, Please 「Watch」to Subscribe.

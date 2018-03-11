@@ -39,7 +39,7 @@ function print(){
 print.call({a: 'hello'}); //hello
 ```
 
-Some interview questions will ask why *print* doesn't define *call* as it's property but *print.call()* won't throw error. It's because *print* is an instance from *Function* constructor so it inherits all the methods defined in *Function.prototype* through [Prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain). 
+Some interview questions will ask why *print* doesn't define *call* as its property but *print.call()* won't throw error. It's because *print* is an instance from *Function* constructor so it inherits all the methods defined in *Function.prototype* through [prototype chain](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain). 
 
 ```javascript
 print.call === Function.prototype.call
@@ -118,7 +118,7 @@ let obj2 = {a: null};
 console.log(obj2.a); //null
 ```
 
-If we aim to filter out undefined and null, we can use *weak comparision* with double equality sign(i.e. ==).
+If we aim to filter out undefined and null, we can use *weak comparison* with double equality sign(i.e. ==).
 
 ```javascript
 console.log(null == undefined); //true

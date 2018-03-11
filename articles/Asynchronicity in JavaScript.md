@@ -1,14 +1,15 @@
-## 前言
+## Preface
 
-异步相关的概念可以参考[浅出js异步事件](https://github.com/n0ruSh/the-art-of-reading/issues/1)。Javascript单线程的机制带来的好处就是在代码运行时可以确保代码访问的变量不会受到其它线程的干扰。试想如果当你遍历一个数组的时候，另外一个线程修改了这个数组，那就乱了套了。setTimeout/setInterval, 浏览器端的ajax, Node里的IO等的运用都是建立在正确的理解异步(e.g. Event loop, Event queue)的基础上。
+For a basic understanding about JS asynchronicity, you can take a loot at 
+[Deep dive into JS asynchronicity](https://github.com/n0ruSh/the-art-of-reading/issues/1). The applications of setTimeout/setInterval, ajax in browser, Node IO won't go far without a deep understanding of Asynchronicity (e.g. Event loop, event queue etc.).
 
-## 异步循环
+## Talk is cheap, show me the code
 
-假设我有一个含文件名的数组，我想依次读取文件直到第一次成功读取某文件，返回文件内容。也就是如果含文件名的数组是['a.txt', 'b.txt']，那就先读a.txt,如果成功返回a.txt内容。读取失败的话读b.txt。依此类推。读文件的话Node分别提供了同步方法[readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options)跟异步方法[readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)。
+Assume that we have an array which constains a list of file names. We would like to read the files IN TURN until we successfully retrieve one file. For example, if the array is ['a.txt', 'b.txt'], we read a.txt first, we return the file content of a.txt if the operation succeeds. Otherwise we continue reading b.txt. For reading files, Nodes provides two APIs, one is sync [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) and the other is async [readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)。
 
-假设我们有2个文件：a.txt(文件内容也为a.txt)跟b.txt(文件内容也为b.txt)。
+Now assume we have two files: a.txt(the content of which is also a.txt) and b.txt(the content of which is also b.txt).
 
-同步的写法比较简单:
+Synchronous solution is quite straightforward:
 
 ```javascript
 let fs = require('fs'),
@@ -22,6 +23,7 @@ function readOneSync(files) {
             //ignore
         }
     }
+    // all fail, throw an exception
     throw new Error('all fail');
 }
 
@@ -29,7 +31,7 @@ console.log(readOneSync(['a.txt', 'b.txt'])); //a.txt
 console.log(readOneSync(['filenotexist', 'b.txt'])); //b.txt
 ```
 
-同步写法最大的问题就是会阻塞事件队列里的其它事件处理。假设读取的文件非常大耗时久，会导致app在此期间无响应。异步IO的话可以有效避免这个问题。但是需要在回调里处理调用的顺序(i.e. 在上一个文件读取的回调里进行是否读取下一个文件的判断和操作)。
+The main problem with synchronous reading is that it will block the main thread and the looping of event queue. The program becomes unreactive if the reading is taking a long time to complete, especially when the file is large. Asynchronous reading can effectively avoid the problem, all we need to pay attention to is to deal with the order of file reading (i.e. read next file in the callback of the previsou reading function).
 
 ```javascript
 let fs = require('fs'),
@@ -40,9 +42,9 @@ function readOne(files, cb) {
         let fileName = files[index];
         fs.readFile(path.join(__dirname, fileName), 'utf8', (err, data) => {
             if(err) {
-                return next(index + 1);
+                return next(index + 1); // if fail, read next file
             } else {
-                return cb(data);
+                return cb(data); // use cb to output the result
             }
         });
     }
@@ -53,11 +55,11 @@ readOne(['a.txt', 'b.txt'], console.log); //a.txt
 readOne(['filenotexist', 'b.txt'], console.log); //b.txt
 ```
 
-异步的写法需要传一个回调函数(i.e. cb)用来对返回结果进行操作。同时定义了一个方法next用来在读取文件失败时递归调用自己(i.e. next)读取下一个文件。
+The asynchronous solution needs to take in another parameter(i.e. *cb*) to deal with the result. It also defines a *next* method to recursively read next file.
 
-## 同时发起多个异步请求
+## Fire multiple asynchronous requests simultaneously.
 
-假设现在我有一个含文件名的数组，我想同时异步读取这些文件。全部读取成功时调用成功回调。任意一个失败的话调用失败回调。
+Assume that we have an array which constains a list of file names, we aim to read the files simultaneously and return all the file contents if all readings are successful. Invoke the failing callback if any of them fails.
 
 ```javascript
 let fs = require('fs'),
@@ -79,10 +81,10 @@ function readAllV1(files, onsuccess, onfail) {
     });
 }
 
-readAllV1(['a.txt', 'b.txt'], console.log, console.log); //结果不确定性
+readAllV1(['a.txt', 'b.txt'], console.log, console.log);
 ```
 
-这里有个问题。因为读取文件的操作是同时异步触发的，取决于文件的读取时间，早读完的文件的handler会被先放入事件队列里。这会导致最后result数组里的内容跟files的文件名并非对应的。举个例子, 假设files是['a.txt', 'b.txt'], a.txt是100M, b.txt是10kb, 2个同时异步读取，因为b.txt比较小所以先读完了，这时候b.txt对应的readFile里的回调在事件队列里的顺序会先于a.txt的。当读取b.txt的回调运行时，result.push(data)会把b.txt的内容先塞入result中。最后返回的result就会是[${b.txt的文件内容}, ${a.txt的文件内容}]。当对返回的结果有顺序要求的时候，我们可以简单的修改下:
+There is an obvious problem in the implementation above: the order of the file contents in *result* does not match along with the file order in *files*. All reading operatioins are asynchronous so that the callback is inserted into event queue when the reading completes. Let's assume *files* is ['a.txt', 'b.txt'], the file size of a.txt and b.txt are 100M and 10kb respectively. When we read the two files in asynchronous way simultaneously, the reading of b.txt will complete before a.txt so the callback for b.txt will be ahead of that of a.txt in the event queue. The finaly *result* will be [${content of b.txt}, ${content of a.txt}]. If we want the order of file contents in *result* to follow the order of file names in *files*, we can make a minor modification to our implementation:
 
 ```javascript
 let fs = require('fs'),
@@ -107,7 +109,7 @@ function readAllV2(files, onsuccess, onfail) {
 readAllV2(['a.txt', 'b.txt'], console.log, console.log); //结果不确定性
 ```
 
-看起来好像是木有问题了。但是！
+It seems to work at first glance, BUT!
 
 ```javascript
 let arr = [];
@@ -115,7 +117,7 @@ arr[1] = 'a';
 console.log(arr.length); //2
 ```
 
-按照readAllV2的实现，假设在a.txt还未读完的时候，b.txt先读完了，我们设了result[1] = data。这时候if(result.length === files.length)是true的，直接就调用了成功回调。。所以我们不能依赖于result.length来做检查。
+Based on the implementation of *readAllV2*, if reading *b.txt* completes before *a.txt*, then we are setting result[1] = ${content of b.txt}, resulting *result.length === files.length* to be true. At the case, we call the success callback to terminate the function without getting result of *a.txt*. Therefore, we can't simply rely on *result.length* to check for the termination status.
 
 ```javascript
 let fs = require('fs'),
@@ -141,15 +143,14 @@ function readAllV3(files, onsuccess, onfail) {
 readAllV3(['a.txt', 'b.txt'], console.log, console.log); //[ 'a.txt', 'b.txt' ]
 ```
 
-如果对Promise比较熟悉的话，Promise里有个[Promise.all](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)实现的就是这个效果。
+If you're somehow familar with Promise, you may know there is a [Promise.all](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method, which does exactly the same thing.
 
+## Make your interface consistent
 
-## 同步跟异步回调函数不要混用,尽量保持接口的一致性
-
-假设我们实现一个带缓存的读取文件方法。当缓存里没有的时候我们去异步读取文件，有的话直接从缓存里面取。
+Let's implement our custom read file method which has cache functionality. We simply return the cache if the cache is available for the file. Otherwise we read the file and set up the cache.
 
 ```javascript
- let fs = require('fs'),
+let fs = require('fs'),
     path = require('path'),
     cache = {};
 
@@ -169,32 +170,32 @@ function readWithCacheV1(file, onsuccess, onfail) {
 }
 ```
 
-具体看下上面的实现:
+Let's take a deep look:
 
-* 当缓存里有数据时，是同步进行调用了成功回调onsuccess。
+* When cache is available, we invoke *onsuccess* **SYNCHRONOUS**
 
 ```javascript
-cache['a.txt'] = 'hello'; //mock一下缓存里的数据
-readWithCacheV1('a.txt', console.log);//同步调用，要等调用完后才进入下一个statement
+cache['a.txt'] = 'hello'; //mock cache data
+readWithCacheV1('a.txt', console.log);//synchronous, completes before goes to next call.
 console.log('after you');
 
-//输出结果:
+//console output:
 hello
 after you
 ```
 
-* 当缓存没有数据时，是异步调用。
+* When cache isn't available, it's **ASYNCHRONOUS** due to the asynchronicity of *readFile*
 
 ```javascript
-readWithCacheV1('a.txt', console.log);//缓存没数据。异步调用
+readWithCacheV1('a.txt', console.log);
 console.log('after you');
 
-//输出结果:
+//console output:
 after you
 hello
 ```
 
-这就造成了不一致性, 程序的执行顺序不可预测容易导致bug车祸现场。要保持一致性的话可以统一采取异步调用的形式，用setTimeout包装下。
+This inconsistency often leads to hidden bug which is hard to track. We can improve the solution to make it behave consistently.
 
 ```javascript
  let fs = require('fs'),
@@ -217,26 +218,26 @@ function readWithCacheV2(file, onsuccess, onfail) {
 }
 ```
 
-重新跑下有缓存跟没有缓存2种情况: 
+Let's reexamine two use cases: 
 
-* 当缓存里有数据时，通过setTimeout异步调用
+* with cache available
 ```javascript
 cache['a.txt'] = 'hello'; 
 readWithCacheV2('a.txt', console.log);
 console.log('after you');
 
-//输出结果:
+//console output:
 after you
 hello
 ```
 
-* 当缓存没有数据时，
+* without cache
 
 ```javascript
 readWithCacheV2('a.txt', console.log);
 console.log('after you');
 
-//输出结果:
+//console output:
 after you
 hello
 ```

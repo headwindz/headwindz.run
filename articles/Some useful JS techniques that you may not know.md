@@ -1,4 +1,4 @@
-I complete reading [Javascript Enlightenment](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Javascript%20Enlightenment/JavaScript%20Enlightenment.pdf) recently. The book is more about basics in JavaScript and suitable for beginners. Here are a list of my benefits and extensions from the book.
+I complete reading [JavaScript Enlightenment](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Javascript%20Enlightenment/JavaScript%20Enlightenment.pdf) recently. The book is more about basics in JavaScript and suitable for beginners. Here are a list of my benefits and extensions from the book.
 
 ## Math
 

@@ -1,10 +1,10 @@
 ## Thoughts
 
-Recently I have been reading the book [Async Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf) about JS asynchronicity and JS event is one of the useful solutions to the problem. To get a deeper understanding of how events work, I create a custom EventEmitter which constains most of the working functionalities of [Node EventEmitter](https://nodejs.org/api/events.html). The [source code](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/event.js) is no more than 60 lines.
+Recently I have been reading the book [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf) about JS asynchronicity and JS event is one of the useful solutions to the problem. To get a deeper understanding of how events work, I create a custom EventEmitter which constains most of the working functionalities of [Node EventEmitter](https://nodejs.org/api/events.html). The [source code](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/event.js) is no more than 60 lines.
 
 ## General ideas
 
-The general ideas is to have an object (*this.handlers*) to hold the mapping from event name(type: string) to its associated listeners/handlers(type: Array\<Function\>). When each event is triggerd, walk through the associated listeners/handlers and execute them.
+The general idea is to have an object (*this.handlers*) to hold the mapping from event name(type: string) to its associated listeners/handlers(type: Array\<Function\>). When each event is triggerd, walk through the associated listeners/handlers and execute them.
 
 ```javascript
 class Emitter {
@@ -50,7 +50,7 @@ removeListener(evt, handler) {
 }
 ```
 
-Note that here we compare the function reference with strict comparision when unbinding a function. Function in Javascript is compared by their reference, same as how objects comparision works.
+Note that here we compare the function reference with strict comparision when unbinding a function. Function in JavaScript is compared by their reference, same as how objects comparision works.
 
 ```javascript
 function f1() {
@@ -142,7 +142,7 @@ function sumWithReduce(arr) { // with reduce
 
 ## Reference 
 
-* [Async Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+* [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
 
 
 ## Notice

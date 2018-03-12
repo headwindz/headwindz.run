@@ -14,4 +14,4 @@
 * [Asynchronicity in JavaScript](https://github.com/n0ruSh/the-art-of-reading/issues/6)
 
 ## [Speaking JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Speaking%20JavaScript/Speaking%20JavaScript.pdf)
-* [Do you know/notice/use these APIs?](https://github.com/n0ruSh/the-art-of-reading/issues/7)
+* [Useful APIs that you probably don't notice](https://github.com/n0ruSh/the-art-of-reading/issues/7)

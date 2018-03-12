@@ -2,7 +2,7 @@ I complete reading [JavaScript Enlightenment](https://github.com/n0ruSh/the-art-
 
 ## Math
 
-JavaScript developers often captalize the constructor name to distinguish the constructors from normal functions. Therefore, some developers may mistake *Math* as function since the name is captalized while *Math* is really just an object.
+JavaScript developers often capitalize the constructor name to distinguish the constructors from normal functions. Therefore, some developers may mistake *Math* as function since the name is capitalized while *Math* is really just an object.
 
 ```javascript
 console.log(typeof Math); // object

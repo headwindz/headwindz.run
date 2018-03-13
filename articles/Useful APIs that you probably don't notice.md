@@ -159,6 +159,11 @@ spread operator works for objects!
 ```javascript
 const point2D = {x: 1, y: 2};
 const point3D = {...point2D, z: 3};
+
+let obj = {a: 'b', c: 'd', e: 'f'};
+let {a, ...other} = obj;
+console.log(a); //b
+console.log(other); //{c: "d", e: "f"}
 ```
 
 ## Reference 

@@ -7,7 +7,7 @@ Take a simple example, if we aim to print out all the elements in an array, most
 ```javascript
 function printWithLoop(arr) {
     for (let i = 0, len = arr.length; i < len; i++) {
-        console.dir(arr[i]);
+        console.log(arr[i]);
     }
 }
 ```
@@ -17,7 +17,7 @@ If you're a bit familar with higher-order function, you may be inclined to use [
 ```javascript
 function printWithIterator(arr) {
     (arr || []).forEach(it => {
-        console.dir(it);
+        console.log(it);
     });
 }
 ```
@@ -26,11 +26,28 @@ We can then simplify the code further with：
 
 ```javascript
 function simplePrint(arr) {
-    (arr || []).forEach(console.dir);
+    (arr || []).forEach(console.log);
 }
 ```
 
 **Have a second thought here, is the output from *simplePrint* exactly the same as *printWithIterator*? If not, can you explain what makes the difference?**
+
+### Function overloading
+
+Function overloading gives the ability for functions to behave differently based on the number or type of the arugments. E.g. [Array.from](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from).
+
+* When given a single argument, it simplely creates a new Array instance from an array-like or iterable object
+
+```javascript
+let set = new Set(['foo', 'bar', 'foo']);
+console.log(Array.from(set)); //["foo", "bar"]
+```
+
+* When given a second argument *mapFn* which is optioinal, it will apply *mapFn* to each element when creating the new array.
+
+```javascript
+console.log(Array.from([1, 2, 3], x => x + x)); // [2, 4, 6] 
+```
 
 ## Curry
 
@@ -81,7 +98,7 @@ sum(1)(2,3); //6
 sum(1,2)(3); //6
 ```
 
-Have a deep look, what we want to achieve is that when the function *sum* receives the arguments it expects (i.e. three numbers), it will compute their sum and return the value. Otherwise, it will keep returning another function (e.g. sum(1) and sum(1,2) both return another function) which can be invoked with more number. This is Curry!
+Have a deep look, what we want to achieve is that when the function *sum* receives the arguments it expects (i.e. three numbers), it will compute their sum and return the value. Otherwise, it will keep returning another function (e.g. sum(1) and sum(1,2) both return another function) which can be invoked with more numbers. This is Curry!
 
 ```javascript
 function curry(fn) { //Let's ignore the function context for simplicity

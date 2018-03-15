@@ -5,9 +5,9 @@ For a basic understanding about JS asynchronicity, you can take a loot at
 
 ## Talk is cheap, show me the code
 
-Assume that we have an array which constains a list of file names. We would like to read the files IN TURN until we successfully retrieve one file. For example, if the array is ['a.txt', 'b.txt'], we read a.txt first, we return the file content of a.txt if the operation succeeds. Otherwise we continue reading b.txt. For reading files, Nodes provides two APIs, one is sync [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) and the other is async [readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)。
+Assume that we have an array which constains a list of file names. We would like to read the files IN TURN until we successfully retrieve one file. For example, if the array is ['a.txt', 'b.txt'], we read *a.txt* first, we return the file content of *a.txt* if the reading succeeds. Otherwise we continue reading *b.txt*. For reading files, Nodes provides two APIs, one is sync [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) and the other is async [readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)。
 
-Now assume we have two files: a.txt(the content of which is also a.txt) and b.txt(the content of which is also b.txt).
+Now assume we have two files: *a.txt* (the content of which is also *a.txt* ) and *b.txt* (the content of which is also *b.txt* ).
 
 Synchronous solution is quite straightforward:
 
@@ -31,7 +31,7 @@ console.log(readOneSync(['a.txt', 'b.txt'])); //a.txt
 console.log(readOneSync(['filenotexist', 'b.txt'])); //b.txt
 ```
 
-The main problem with synchronous reading is that it will block the main thread and the looping of event queue. The program becomes unreactive if the reading is taking a long time to complete, especially when the file is large. Asynchronous reading can effectively avoid the problem, all we need to pay attention to is to deal with the order of file reading (i.e. read next file in the callback of the previsou reading function).
+The main problem with synchronous reading is that it will block the main thread and the looping of event queue. The program becomes unreactive if the reading is taking a long time to complete, especially when the file is large. Asynchronous reading can effectively avoid the problem. All we need to pay attention to is to deal with the order of file reading (i.e. read next file in the callback of the previous *readFile* call).
 
 ```javascript
 let fs = require('fs'),
@@ -84,7 +84,7 @@ function readAllV1(files, onsuccess, onfail) {
 readAllV1(['a.txt', 'b.txt'], console.log, console.log);
 ```
 
-There is an obvious problem in the implementation above: the order of the file contents in *result* does not match along with the file order in *files*. All reading operatioins are asynchronous so that the callback is inserted into event queue when the reading completes. Let's assume *files* is ['a.txt', 'b.txt'], the file size of a.txt and b.txt are 100M and 10kb respectively. When we read the two files in asynchronous way simultaneously, the reading of b.txt will complete before a.txt so the callback for b.txt will be ahead of that of a.txt in the event queue. The finaly *result* will be [${content of b.txt}, ${content of a.txt}]. If we want the order of file contents in *result* to follow the order of file names in *files*, we can make a minor modification to our implementation:
+There is an obvious problem in the implementation above: the order of the file contents in *result* does not match along with the file order in *files* . All reading operatioins are asynchronous so that the callback is inserted into event queue when the reading completes. Let's assume *files* is ['a.txt', 'b.txt'], the file size of *a.txt* and *b.txt* are 100M and 10kb respectively. When we read the two files in asynchronous way simultaneously, the reading of *b.txt* will complete before *a.txt* so the callback for *b.txt* will be ahead of that of *a.txt* in the event queue. The finaly *result* will be [${content of *b.txt* }, ${content of *a.txt* }]. If we want the order of file contents in *result* to follow the order of file names in *files*, we can make a minor modification to our implementation:
 
 ```javascript
 let fs = require('fs'),
@@ -117,7 +117,7 @@ arr[1] = 'a';
 console.log(arr.length); //2
 ```
 
-Based on the implementation of *readAllV2*, if reading *b.txt* completes before *a.txt*, then we are setting result[1] = ${content of b.txt}, resulting *result.length === files.length* to be true. At the case, we call the success callback to terminate the function without getting result of *a.txt*. Therefore, we can't simply rely on *result.length* to check for the termination status.
+Based on the implementation of *readAllV2* , if reading *b.txt* completes before *a.txt* , then we are setting result[1] = ${content of *b.txt* }, resulting in *result.length === files.length* to be true. At the case, we call the success callback to terminate the function without getting result of *a.txt* . Therefore, we can't simply rely on *result.length* as the completioin indicator.
 
 ```javascript
 let fs = require('fs'),
@@ -176,7 +176,7 @@ Let's take a deep look:
 
 ```javascript
 cache['a.txt'] = 'hello'; //mock cache data
-readWithCacheV1('a.txt', console.log);//synchronous, completes before goes to next call.
+readWithCacheV1('a.txt', console.log);//synchronous, completes before going into next call.
 console.log('after you');
 
 //console output:
@@ -195,7 +195,7 @@ after you
 hello
 ```
 
-This inconsistency often leads to hidden bug which is hard to track. We can improve the solution to make it behave consistently.
+This inconsistency often leads to hidden bugs which are hard to track and debug. We can improve the solution to make it behave consistently.
 
 ```javascript
  let fs = require('fs'),

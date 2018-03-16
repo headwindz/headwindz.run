@@ -5,7 +5,7 @@ For a basic understanding about JS asynchronicity, you can take a loot at
 
 ## Talk is cheap, show me the code
 
-Assume that we have an array which constains a list of file names. We would like to read the files IN TURN until we successfully retrieve one file. For example, if the array is ['a.txt', 'b.txt'], we read *a.txt* first, we return the file content of *a.txt* if the reading succeeds. Otherwise we continue reading *b.txt*. For reading files, Nodes provides two APIs, one is sync [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) and the other is async [readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)。
+Assume that we have an array which contains a list of file names. We would like to read the files IN TURN until we successfully retrieve one file. For example, if the array is ['a.txt', 'b.txt'], we read *a.txt* first, we return the file content of *a.txt* if the reading succeeds. Otherwise we continue reading *b.txt*. For reading files, Nodes provides two APIs, one is sync [readFileSync](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) and the other is async [readFile](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)。
 
 Now assume we have two files: *a.txt* (the content of which is also *a.txt* ) and *b.txt* (the content of which is also *b.txt* ).
 

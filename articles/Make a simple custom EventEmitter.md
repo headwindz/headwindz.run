@@ -1,6 +1,6 @@
 ## Thoughts
 
-Recently I have been reading the book [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf) about JS asynchronicity and JS event is one of the useful solutions to the problem. To get a deeper understanding of how events work, I create a custom EventEmitter which constains most of the working functionalities of [Node EventEmitter](https://nodejs.org/api/events.html). The [source code](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/event.js) is no more than 60 lines.
+Recently I have been reading the book [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG) about JS asynchronicity and JS event is one of the useful solutions to the problem. To get a deeper understanding of how events work, I create a custom EventEmitter which constains most of the working functionalities of [Node EventEmitter](https://nodejs.org/api/events.html). The [source code](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/event.js) is no more than 60 lines.
 
 ## General ideas
 
@@ -142,7 +142,7 @@ function sumWithReduce(arr) { // with reduce
 
 ## Reference 
 
-* [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+* [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
 
 ## Notice

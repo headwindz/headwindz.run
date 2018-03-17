@@ -168,7 +168,7 @@ console.log(other); //{c: "d", e: "f"}
 
 ## Reference 
 
-* [Speaking Javascript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Speaking%20JavaScript/Speaking%20JavaScript.pdf)
+* [Speaking Javascript](https://www.amazon.com/Speaking-JavaScript-Depth-Guide-Programmers/dp/1449365035/ref=sr_1_1?s=books&ie=UTF8&qid=1521248539&sr=1-1&keywords=speaking+JavaScript)
 * [MDN](https://developer.mozilla.org/en-US/)
 
 

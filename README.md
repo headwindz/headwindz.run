@@ -1,17 +1,17 @@
 # The repo contains a list of reading notes for the books that I have read and personally think worth sharing. 
 
-## [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+## [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
 * [Deep dive into JS asynchronicity](https://github.com/n0ruSh/the-art-of-reading/issues/1)
 * [Make a simple custom EventEmitter](https://github.com/n0ruSh/the-art-of-reading/issues/2)
 * [Five minutes to understand async and defer](https://github.com/n0ruSh/the-art-of-reading/issues/3)
 
-## [JavaScript Enlightenment](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Javascript%20Enlightenment/JavaScript%20Enlightenment.pdf)
+## [JavaScript Enlightenment](https://www.amazon.com/JavaScript-Enlightenment-Library-User-Developer/dp/1449342884)
 * [Some useful JS techniques that you may not know](https://github.com/n0ruSh/the-art-of-reading/issues/4)
 
-## [Effective JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Effective%20Javascript/Effective%20JavaScript-68%20Specific%20Ways%20to%20Harness%20the%20Power%20of%20JavaScript.pdf)
+## [Effective JavaScript](https://www.amazon.com/Effective-JavaScript-Specific-Software-Development/dp/0321812182/ref=sr_1_3?s=books&ie=UTF8&qid=1521248523&sr=1-3&keywords=Effective+JavaScript)
 * [You need to know curry](https://github.com/n0ruSh/the-art-of-reading/issues/5)
 * [Asynchronicity in JavaScript](https://github.com/n0ruSh/the-art-of-reading/issues/6)
 
-## [Speaking JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Speaking%20JavaScript/Speaking%20JavaScript.pdf)
+## [Speaking JavaScript](https://www.amazon.com/Speaking-JavaScript-Depth-Guide-Programmers/dp/1449365035/ref=sr_1_1?s=books&ie=UTF8&qid=1521248539&sr=1-1&keywords=speaking+JavaScript)
 * [Useful APIs that you probably don't notice](https://github.com/n0ruSh/the-art-of-reading/issues/7)

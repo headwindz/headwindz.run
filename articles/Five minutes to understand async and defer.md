@@ -1,7 +1,7 @@
 ## Script tag
 
 When we want to insert a script into a web page, the standard way is to use the script tag(i.e. \<script\>). The first impression that comes to people's mind about script tag is -  __BLOCKING__ . 
-The book [High Performance Web Sites](https://github.com/n0ruSh/the-art-of-reading/blob/master/performance/High%20Performance%20Web%20Sites/High%20Performance%20Web%20Sites.pdf) Rule 6 suggests to put scripts at the bottom of html body. The article will examine how putting scripts at varying positions affects performance and how *async* and *defer* attributes work for script tag.
+The book [High Performance Web Sites](https://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309/ref=sr_1_1?s=books&ie=UTF8&qid=1521248657&sr=1-1&keywords=high+performance+websites) Rule 6 suggests to put scripts at the bottom of html body. The article will examine how putting scripts at varying positions affects performance and how *async* and *defer* attributes work for script tag.
 
 First thing first, when a script is referenced in a html page, the browser does two things for you:
 
@@ -68,7 +68,7 @@ Conclusion:
 
 ## Put script tags at the bottom of body
 
-This is the suggestion from the Rule 6 of the book [High Performance Web Sites](https://github.com/n0ruSh/the-art-of-reading/blob/master/performance/High%20Performance%20Web%20Sites.pdf).
+This is the suggestion from the Rule 6 of the book [High Performance Web Sites](https://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309/ref=sr_1_1?s=books&ie=UTF8&qid=1521248657&sr=1-1&keywords=high+performance+websites).
 
 ```html
 <!--all-in-body.html-->
@@ -205,9 +205,9 @@ The general rule to import script is:
 
 ## Reference
 
-* [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+* [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
-* [High Performance Web Sites](https://github.com/n0ruSh/the-art-of-reading/blob/master/performance/High%20Performance%20Web%20Sites/High%20Performance%20Web%20Sites.pdf)
+* [High Performance Web Sites](https://www.amazon.com/High-Performance-Web-Sites-Essential/dp/0596529309/ref=sr_1_1?s=books&ie=UTF8&qid=1521248657&sr=1-1&keywords=high+performance+websites)
 
 ## Notice
 

@@ -99,7 +99,7 @@ fs.readFile('abc.txt', function(err, data) {
 
 ## Reference 
 
-* [Async JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Async%20Javascript/Async%20JavaScript.pdf)
+* [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
 
 ## Notice

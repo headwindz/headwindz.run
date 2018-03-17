@@ -168,7 +168,7 @@ setTimeout(print.bind(null, arr), 1000);
 
 ## Reference 
 
-* [Effective JavaScript](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Effective%20Javascript/Effective%20JavaScript-68%20Specific%20Ways%20to%20Harness%20the%20Power%20of%20JavaScript.pdf)
+* [Effective JavaScript](https://www.amazon.com/Effective-JavaScript-Specific-Software-Development/dp/0321812182/ref=sr_1_3?s=books&ie=UTF8&qid=1521248523&sr=1-3&keywords=Effective+JavaScript)
 
 
 ## Notice

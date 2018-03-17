@@ -147,4 +147,4 @@ function sumWithReduce(arr) { // with reduce
 
 ## Notice
 
-* If you want to follow the latest news/articles for the series of reading notes, Please 「Watch」to Subscribe.
+* If you want to follow the latest news/articles for the series of reading notes, Please [「Watch」](https://github.com/n0ruSh/the-art-of-reading)to Subscribe.

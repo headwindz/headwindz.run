@@ -102,6 +102,6 @@ fs.readFile('abc.txt', function(err, data) {
 * [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
 
-## Notice
+### Notice
 
-* If you want to follow the latest news/articles for the series of reading notes, Please 「Watch」to Subscribe.
+* If you want to follow the latest news/articles for the series of reading notes, Please [「Watch」](https://github.com/n0ruSh/the-art-of-reading)to Subscribe.

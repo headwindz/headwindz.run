@@ -68,7 +68,7 @@ console.log(f1 === f3); //true
 
 
 
-### once - binding, but only can be triggerd once
+### once - binding, but only can be triggered once
 
 ```javascript
 once(evt, handler) {

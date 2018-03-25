@@ -1,4 +1,4 @@
-Recursion, simply put, is calling a function on itself. It can used to break down complex problems into smaller managable similar units that can be handled by the same function.
+Recursion, simply put, is calling a function on itself. It can used to break down complex problems into smaller manageable similar units that can be handled by the same function.
 
 ## Recursion vs Iteration
 
@@ -84,7 +84,7 @@ function findSolution(num) {
         } else if (start === num) {
             return history; //solution found
         }
-        return find(start + 5, `(${history} + 5)`) || find(start * 3, `(${history} * 3)`)
+        return find(start + 5, `(${history} + 5)`) || find(start * 3, `(${history} * 3)`);
     }
 
     return find(1, '1');

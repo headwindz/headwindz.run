@@ -15,3 +15,6 @@
 
 ## [Speaking JavaScript](https://www.amazon.com/Speaking-JavaScript-Depth-Guide-Programmers/dp/1449365035/ref=sr_1_1?s=books&ie=UTF8&qid=1521248539&sr=1-1&keywords=speaking+JavaScript)
 * [Useful APIs that you probably don't notice](https://github.com/n0ruSh/the-art-of-reading/issues/7)
+
+## [Eloquent JavaScript](https://www.amazon.com/Eloquent-JavaScript-2nd-Ed-Introduction/dp/1593275846)
+* [Understanding Recursion](https://github.com/n0ruSh/the-art-of-reading/issues/8)

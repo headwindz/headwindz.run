@@ -18,4 +18,4 @@
 
 ## [Eloquent JavaScript](https://www.amazon.com/Eloquent-JavaScript-2nd-Ed-Introduction/dp/1593275846)
 * [Understanding Recursion](https://github.com/n0ruSh/the-art-of-reading/issues/9)
-* [Introuction to JavaScript iterator](https://github.com/n0ruSh/the-art-of-reading/issues/10)
+* [Introduction to JavaScript iterator](https://github.com/n0ruSh/the-art-of-reading/issues/10)

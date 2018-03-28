@@ -24,7 +24,7 @@ An *iterator* is an object that provides a *next* method which returns the next 
 
 ```javascript
 // Array has build-in iteration support
-functioin forOf(arr) {
+function forOf(arr) {
     for(let i of arr) {
         console.log(i);
     }

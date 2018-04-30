@@ -108,6 +108,8 @@ Let's put together the above concepts to achieve `fixed` position effect with `a
 </html>
 ```
 
+[Code Sample](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Eloquent%20Javascript/fixed.html)
+
 ## Reference 
 
 * [Eloquent JavaScript](https://www.amazon.com/Eloquent-JavaScript-2nd-Ed-Introduction/dp/1593275846)

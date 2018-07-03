@@ -54,7 +54,7 @@ console.log(Array.from([1, 2, 3], x => x + x)); // [2, 4, 6]
 Curry, also called partial application. Currying a function basically means that a function will absord some arguments and return another function for later invocation. The returning function can have access to the already absorded arguments through [closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures).
 
 
-### Parameters vs Arugments
+### Parameters vs Arguments
 
 First we need to understand two basic concepts in functions. 
 

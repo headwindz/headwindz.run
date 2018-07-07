@@ -20,3 +20,6 @@
 * [Understanding Recursion](https://github.com/n0ruSh/the-art-of-reading/issues/9)
 * [Introduction to JavaScript iterator](https://github.com/n0ruSh/the-art-of-reading/issues/10)
 * [Fixed with absolute](https://github.com/n0ruSh/the-art-of-reading/issues/11)
+
+## [Soft Skills: The software developer's life manual](https://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397)
+* [The software developer's life manual](https://github.com/n0ruSh/the-art-of-reading/issues/12)

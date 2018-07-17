@@ -1,5 +1,6 @@
-# The repo contains a list of reading notes for the books that I have read and personally think worth sharing. 
+# 📚 The repo contains a list of reading notes for the books that I have read and personally think worth sharing. 
 
+# 🔥 Javascript
 ## [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
 * [Deep dive into JS asynchronicity](https://github.com/n0ruSh/the-art-of-reading/issues/1)
@@ -21,5 +22,11 @@
 * [Introduction to JavaScript iterator](https://github.com/n0ruSh/the-art-of-reading/issues/10)
 * [Fixed with absolute](https://github.com/n0ruSh/the-art-of-reading/issues/11)
 
+# 🚀 Linux
+
+## [Linux Command Line](https://www.safaribooksonline.com/videos/linux-command-line/9780134445533)
+* [Linux Command Line](https://github.com/n0ruSh/the-art-of-reading/issues/13)
+
+# 👀 General
 ## [Soft Skills: The software developer's life manual](https://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397)
 * [The software developer's life manual](https://github.com/n0ruSh/the-art-of-reading/issues/12)

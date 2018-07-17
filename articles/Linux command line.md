@@ -71,7 +71,7 @@ Userful Options:
 | -c | create a new archive. | tar -cf archive.tar file1 file2 |
 | -f | use archive file or device ARCHIVE |
 | -v | verbosely list files processed. |
-| -x | untar tar archive File | tar -cvf archive.tar
+| -x | untar tar archive file | tar -cvf archive.tar
 
 ## [gzip](https://www.computerhope.com/unix/gzip.htm): compress
 

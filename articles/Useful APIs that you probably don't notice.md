@@ -133,6 +133,23 @@ console.log(output);
 // that Mike is a youngster
 ```
 
+# Number
+
+## Number.prototype.toString(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
+
+In Javascript strings, each character represents a single 16-bit unit of UTF-16 text.
+
+```javascript
+
+let s = '你';
+let codePoint = s.charCodeAt(0);
+console.log(codePoint); // 20320
+let hex = codePoint.toString(16); // to hex format
+console.log(hex); // 4f60
+console.log(String.fromCharCode('0x4f60', 20320)); // 你你
+console.log('\u4f60'); // 你
+```
+
 # null vs undefined
 
 If we don't want to distinguish null and undefined, we can use *==*

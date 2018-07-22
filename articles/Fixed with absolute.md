@@ -1,16 +1,16 @@
 ## A few concepts
 
-* [offsetWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth): gives you the width the element takes up in pixels.
-* [offsetHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight): gives you the height the element takes up in pixels.
-* [clientWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth): gives you the size of the space inside the element, ignoring border width.
-* [clientHeight](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight): gives you the size of the space inside the element, ignoring border height.
-* [pageXOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset): returns the number of pixels scrolled along the horizontal axis (left and right).
-* [pageYOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset): returns the number of pixels the document is currently scrolled along the vertical axis, with a value of 0.0 indicating that the top edge of the Document is currently aligned with the top edge of the window's content area.
-* [getBoundingClientRect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect): returns an object with top, bottom, left, and right properties, indicating the pixel positions of the sides of the element relative to the top left of the viewport. If you want them relative to the whole document, you must add the current scroll position, which you can find in the pageXOffset and pageYOffset bindings.
-* [innerWidth](https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight): width (in pixels) of the browser window viewport including, if rendered, the vertical scrollbar.
-* [innerHeight](https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight): height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
-* [scrollWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth): a measurement of the width of an element's content, including content not visible on the screen due to overflow.
-* [scrollHeight](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight): a measurement of the height of an element's content, including content not visible on the screen due to overflow.
+- [offsetWidth](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetWidth): gives you the width the element takes up in pixels.
+- [offsetHeight](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetHeight): gives you the height the element takes up in pixels.
+- [clientWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientWidth): gives you the size of the space inside the element, ignoring border width.
+- [clientHeight](https://developer.mozilla.org/en-US/docs/Web/API/Element/clientHeight): gives you the size of the space inside the element, ignoring border height.
+- [pageXOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageXOffset): returns the number of pixels scrolled along the horizontal axis (left and right).
+- [pageYOffset](https://developer.mozilla.org/en-US/docs/Web/API/Window/pageYOffset): returns the number of pixels the document is currently scrolled along the vertical axis, with a value of 0.0 indicating that the top edge of the Document is currently aligned with the top edge of the window's content area.
+- [getBoundingClientRect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect): returns an object with top, bottom, left, and right properties, indicating the pixel positions of the sides of the element relative to the top left of the viewport. If you want them relative to the whole document, you must add the current scroll position, which you can find in the pageXOffset and pageYOffset bindings.
+- [innerWidth](https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight): width (in pixels) of the browser window viewport including, if rendered, the vertical scrollbar.
+- [innerHeight](https://developer.mozilla.org/en-US/docs/Web/API/Window/innerHeight): height (in pixels) of the browser window viewport including, if rendered, the horizontal scrollbar.
+- [scrollWidth](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollWidth): a measurement of the width of an element's content, including content not visible on the screen due to overflow.
+- [scrollHeight](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight): a measurement of the height of an element's content, including content not visible on the screen due to overflow.
 
 ## Practice
 
@@ -110,10 +110,10 @@ Let's put together the above concepts to achieve `fixed` position effect with `a
 
 [Code Sample](https://github.com/n0ruSh/the-art-of-reading/blob/master/javascript/Eloquent%20Javascript/fixed.html)
 
-## Reference 
+## Reference
 
-* [Eloquent JavaScript](https://www.amazon.com/Eloquent-JavaScript-2nd-Ed-Introduction/dp/1593275846)
+- [Eloquent JavaScript](https://www.amazon.com/Eloquent-JavaScript-2nd-Ed-Introduction/dp/1593275846)
 
 ## Notice
 
-* If you want to follow the latest news/articles for the series of reading notes, Please [「Watch」](https://github.com/n0ruSh/the-art-of-reading)to Subscribe.
+- If you want to follow the latest news/articles for the series of reading notes, Please [「Watch」](https://github.com/n0ruSh/the-art-of-reading)to Subscribe.

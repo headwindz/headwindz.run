@@ -103,6 +103,21 @@ If the seperator is a regular expression that contains capturing groups, the cap
 'abc1def2ghi'.split(/(\d)/);  // ["abc", "1", "def", "2", "ghi"]
 ```
 
+## [String.prototype.match](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+
+```javascript
+// get query value from query string with specified query key
+function getQueryValue(query, key) {
+    let regExp = new RegExp(`${key}=([^&]+)`)
+    let [match, group] =  query.match(regExp);
+    return decodeURIComponent(group);
+}
+
+let query = 'source=hp&ei=LINUW6zsCozw_wTFr5u4Cg&q=test&oq=test&name=i%20am%20michael';
+console.log(getQueryValue(query, 'q')); // 'test'
+console.log(getQueryValue(query, 'name')); // 'i am michael'
+```
+
 ##  [Tagged  string literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 
 ```javascript
@@ -135,7 +150,7 @@ console.log(output);
 
 # Number
 
-## Number.prototype.toString(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
+## [Number.prototype.toString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
 
 In Javascript strings, each character represents a single 16-bit unit of UTF-16 text.
 

@@ -22,6 +22,9 @@
 * [Introduction to JavaScript iterator](https://github.com/n0ruSh/the-art-of-reading/issues/10)
 * [Fixed with absolute](https://github.com/n0ruSh/the-art-of-reading/issues/11)
 
+## [Learn ECMAScript](https://www.amazon.com/dp/1788620062)
+* [Learn ECMAScript](https://github.com/n0ruSh/the-art-of-reading/issues/14)
+
 # 🚀 Linux
 
 ## [Linux Command Line](https://www.safaribooksonline.com/videos/linux-command-line/9780134445533)

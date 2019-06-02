@@ -25,6 +25,11 @@
 ## [Learn ECMAScript](https://www.amazon.com/dp/1788620062)
 * [Learn ECMAScript](https://github.com/n0ruSh/the-art-of-reading/issues/14)
 
+# 🎨 CSS
+
+## [CSS - The Complete Guide (incl. Flexbox, Grid and Sass)](https://www.packtpub.com/web-development/css-complete-guide-incl-flexbox-grid-and-sass-video)
+* [Introduction to Sass](https://github.com/n0ruSh/the-art-of-reading/issues/16)
+
 # 🚀 Linux
 
 ## [Linux Command Line](https://www.safaribooksonline.com/videos/linux-command-line/9780134445533)

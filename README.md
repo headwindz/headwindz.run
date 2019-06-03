@@ -29,6 +29,7 @@
 
 ## [CSS - The Complete Guide (incl. Flexbox, Grid and Sass)](https://www.packtpub.com/web-development/css-complete-guide-incl-flexbox-grid-and-sass-video)
 * [Introduction to Sass](https://github.com/n0ruSh/the-art-of-reading/issues/16)
+* [Polishing CSS](https://github.com/n0ruSh/the-art-of-reading/issues/17)
 
 # 🚀 Linux
 

@@ -25,6 +25,10 @@
 ## [Learn ECMAScript](https://www.amazon.com/dp/1788620062)
 * [Learn ECMAScript](https://github.com/n0ruSh/the-art-of-reading/issues/14)
 
+## [ES6 in motion](https://www.manning.com/livevideo/es6-in-motion)
+
+* [Iterators and iterables](https://github.com/n0ruSh/the-art-of-reading/issues/18)
+
 # 🎨 CSS
 
 ## [CSS - The Complete Guide (incl. Flexbox, Grid and Sass)](https://www.packtpub.com/web-development/css-complete-guide-incl-flexbox-grid-and-sass-video)

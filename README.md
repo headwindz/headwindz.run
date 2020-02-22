@@ -29,6 +29,12 @@
 
 * [Iterators and iterables](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/Iterators%20and%20iterables.md)
 
+# 🎨 React
+
+## [React - The Complete Guide (incl. Hooks, React Router and Redux)](https://learning.oreilly.com/videos/react-the/9781789132229)
+
+* [SPA vs MAP](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/SPA%20vs%20MPA.md)
+
 # 🎨 CSS
 
 ## [CSS - The Complete Guide (incl. Flexbox, Grid and Sass)](https://www.packtpub.com/web-development/css-complete-guide-incl-flexbox-grid-and-sass-video)

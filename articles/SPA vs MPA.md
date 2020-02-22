@@ -5,7 +5,7 @@ A single-page application (SPA) is an app that works inside a browser and does n
 ```web pack.config.js
 module.exports = {
 	entry: {
-		‘app’: getPath(‘app’)
+		'app': getPath(‘app’)
 	}
 	devServer: {
 		...
@@ -35,26 +35,23 @@ Multiple-page applications work in a “traditional” way. It reloads the entir
 
 module.exports = {
 	entry: {
-    	'app': [getPath(‘app’)],
-    	'doc': [getPath(‘doc’)]
+   	'app': [getPath(‘app’)],
+    'doc': [getPath(‘doc’)]
 	},
  	devServer: {
 		historyApiFallback: {
 			rewrites: [
-        		{ from: /^\/doc/, to: 'doc.html' },
-        		{ from: /./, to: 'app.html' }
-			}
+      	{ from: /^\/doc/, to: 'doc.html' },
+      	{ from: /./, to: 'app.html' }
+			]
 		}
-    }
   }
 }
-
 ```
 
 * In production with nginx:
 
 ```nginx.conf
-
 location /doc {
 	root /home/dist/doc;
 	index index.html index.htm;

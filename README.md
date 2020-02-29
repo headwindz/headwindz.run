@@ -51,6 +51,11 @@
 ## [Deep Dive into Functional JavaScript](https://www.udemy.com/course/deep-dive-into-functional-javascript)
 * [High order functions (pipe, compose,  reduce, filter) implementaion in native JS](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/High%20order%20functions%20(pipe%2C%20compose%2C%20%20reduce%2C%20filter)%20implementaion%20in%20native%20JS.md)
 
+#  🛹 Vim 
+
+## [Mastering VIM](https://www.oreilly.com/library/view/mastering-vim/9781491908334/)
+* [Vim cheatsheet](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/Vim%20cheatsheet.md)
+
 # 👀 General
 ## [Soft Skills: The software developer's life manual](https://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397)
 * [The software developer's life manual](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/The%20software%20developer's%20life%20manual.md)

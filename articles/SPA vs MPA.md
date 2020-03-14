@@ -1,4 +1,5 @@
 ## Single Page Application
+
 A single-page application (SPA) is an app that works inside a browser and does not require page reloading during use. `The server should always return the same page with different paths and the routing is done on front end side, usually with a routing library like react-router`
 
 * In development with webpack, when using the  [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History) , the `index.html` page will likely have to be served in place of any 404 responses. Enable devServer.historyApiFallback by setting it to true:

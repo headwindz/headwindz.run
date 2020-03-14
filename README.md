@@ -32,6 +32,7 @@
 # 🎨 React
 
 ## [React - The Complete Guide (incl. Hooks, React Router and Redux)](https://learning.oreilly.com/videos/react-the/9781789132229)
+## [Learning React, 2nd Edition](https://www.oreilly.com/library/view/learning-react-2nd/9781492051718/)
 
 * [SPA vs MAP](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/SPA%20vs%20MPA.md)
 

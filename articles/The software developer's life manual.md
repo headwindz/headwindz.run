@@ -25,7 +25,7 @@ Reading notes from the book [Soft Skills: The software developer's life manual](
 - Get the big picture
 - Determine scope
 - Define success
-- Find Resource
+- Find resource
 - Create a learning plan
 - Filter resources
 - Learn enough to get started

@@ -16,7 +16,7 @@ Reading notes from the book [Soft Skills: The software developer's life manual](
 
 ## Being professional
 
-- A professional is someone who takes their responsibilities and career seriously and is willing to make the tough choices that have to be made - often at their own expense - for the purpose of doing what they know is right. Set a high bar and stick to it, don't compromise for the shorcut.
+- A professional is someone who takes their responsibilities and career seriously and is willing to make the tough choices that have to be made - often at their own expense - for the purpose of doing what they know is right. Set a high bar and stick to it, don't compromise for the shortcut.
 - A real professional has high-quality standards for all areas of his or her work, because a professional knows that 'how you do anything is how you do everything.
 - Find your gaps: anything you're doing repeatedly is worth a thorough examination to see if there's something you don't know that, if you did, might increase your efficiency.
 
@@ -36,7 +36,7 @@ Reading notes from the book [Soft Skills: The software developer's life manual](
 ## Facing failure
 
 - Failure isn't the same thing as defeat. Failure is temporary, defeat is permanent. If you want to succeed, you have to learn how to swallow your pride and get out there and not be afraid to make a fool of yourself.
-- You could have all the skills in life that should make you successful, but if you lack one important skill, perseverance, it will all be worthless, because at the first sign of trouble, you'lll give up - and we all will face some amount of trouble in our lives.
+- You could have all the skills in life that should make you successful, but if you lack one important skill, perseverance, it will all be worthless, because at the first sign of trouble, you'll give up - and we all will face some amount of trouble in our lives.
 
 ## Productivity
 

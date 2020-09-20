@@ -95,7 +95,6 @@ React.createElement({
 
 To check whether a variable is a react element, we can use `isValidElement`
 
-
 ```typescript
 function isValidElement<P>(object: {} | null | undefined): object is ReactElement<P>;
 ```
@@ -106,7 +105,6 @@ import { isValidElement } from 'react'
 isValidElement('hello'); // false
 isValidElement(<div>a</div>); // true
 ```
-
 
 ## ReactNode
 

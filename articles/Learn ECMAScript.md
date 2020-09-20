@@ -11,9 +11,9 @@ console.log(you.codePointAt(0)); // 20320
 
 const emoj = '💯';
 console.log(emoj.codePointAt(0)); // 128175
-console.log(emoj.charCodeAt(0)); //55357
+console.log(emoj.charCodeAt(0)); // 55357
 console.log(emoj.charCodeAt(1)); // 56495
-console.log(emoj.length); //2
+console.log(emoj.length); // 2
 
 ```
 

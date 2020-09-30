@@ -1,6 +1,6 @@
 # 📚 The repo contains a list of reading notes for the books that I have read and personally think worth sharing. 
 
-# 🔥 Javascript
+# 🔥 Javascript Code
 ## [Async JavaScript](https://www.amazon.com/Async-JavaScript-Responsive-Pragmatic-Express-ebook/dp/B00AKM4RVG)
 
 * [Deep dive into JS asynchronicity](https://github.com/n0ruSh/the-art-of-reading/blob/master/articles/Deep%20dive%20into%20JS%20asynchronicity.md)

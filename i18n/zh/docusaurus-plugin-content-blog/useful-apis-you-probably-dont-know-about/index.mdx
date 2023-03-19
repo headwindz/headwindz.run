@@ -1,0 +1,273 @@
+---
+title: 那些你可能不知道的实用的 APIs
+tags: [javascript]
+date: 2022-10-07
+---
+
+本篇文章将介绍一些对前端开发不是很常见，但是很实用的 APIs。
+
+## [Fullscreen](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API)
+
+要使元素全屏显示，可以使用 css 的 `fixed` 定位
+
+```css
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+```
+
+Fullscreen API 可以更快捷地实现这一目的。
+
+### 用例
+
+- 创建全屏视频播放器或全屏图像查看器。
+- 进入聚焦模式
+
+### 例子
+
+```html
+<!--  html -->
+<div id="wrapper">
+  <button id="full">Enter full screen</button>
+  <button id="exit">Exit full screen</button>
+</div>
+```
+
+```js
+const container = document.getElementById("wrapper");
+
+const triggerBtn = document.getElementById("full");
+const exitBtn = document.getElementById("exit");
+
+triggerBtn.addEventListener("click", () => {
+  // Go fullscreen
+  container.requestFullscreen();
+});
+
+exitBtn.addEventListener("click", () => {
+  // Exit fullscreen
+  container.exitFullscreen();
+});
+```
+
+## IntersectionObserver
+
+`IntersectionObserver` 提供了一种异步观察目标元素与其祖先元素或顶级文档视窗 (viewport) 交叉状态的方法。
+
+### 用例
+
+- 无限滚动
+- 图片懒加载
+- 埋点
+
+### 例子
+
+实现当图片在屏幕上完全可见时，用边框突显图片。以前要实现这一点，必须以 `拉` 的方式阶段性地不停检查图片的边界来完成 (e.g. `setInterval` + ` getBoundingClientRect`)。使用 `IntersectionObserver` API，只需进行 `observe` 和指定 `callback` 即可
+
+[完整 Demo](https://codesandbox.io/s/lazy-load-image-drsfih?file=/src/index.js)
+
+```js
+// Populate mock images into html
+const container = document.getElementById("container");
+for (let i = 0; i < 30; i++) {
+  const imgElement = document.createElement("img");
+  imgElement.src = "https://avatars.githubusercontent.com/u/7504237?v=4";
+  imgElement.dataset.index = i;
+  container.appendChild(imgElement);
+}
+
+// Specify the options for the observer (which mutations to observe)
+let options = {
+  threshold: [0, 0.25, 0.5, 0.75, 1], // The timing of callback when intersetion reaches the threshold
+};
+
+// Create the observer
+let observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.intersectionRatio === 1) {
+      entry.target.style.border = "1px solid teal";
+    } else {
+      entry.target.style.border = "none";
+    }
+  });
+}, options);
+
+let imgs = document.querySelectorAll("img");
+for (let img of imgs) {
+  // Observe
+  observer.observe(img);
+}
+```
+
+## [Page Visibility API](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API)
+
+每当页面可见性状态发生变化（i.e. 变为可见或隐藏）时，`Page Visibility API` 会触发事件
+
+### 用例
+
+- 当页面隐藏或可见时暂停或恢复视频
+
+### 例子
+
+```js
+document.addEventListener("visibilitychange", function () {
+  if (document.visibilityState === "visible") {
+    // page is visible, resume video
+  } else {
+    // page is hidden, stop video
+  }
+});
+```
+
+## [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API)
+
+Web Share API 提供了一种与底层操作系统的共享机制共享文本、链接、文件等的机制。
+
+### 用例
+
+- 将页面中的内容分享到社交媒体
+
+### 例子
+
+[完整 Demo](https://codesandbox.io/s/web-share-bji41q?file=/src/index.js:0-399)
+
+```html
+<!-- html -->
+<body>
+  <button id="share">Share</button>
+</body>
+```
+
+```js
+const shareBtn = document.getElementById("share");
+
+const share = (data) => {
+  if (navigator.canShare(data)) {
+    return navigator.share(data);
+  }
+  throw new Error("The data is NOT shareable");
+};
+
+shareBtn.addEventListener("click", () => {
+  const shareData = {
+    title: "MDN",
+    text: "Learn web development on MDN!",
+    url: "https://developer.mozilla.org",
+  };
+
+  share(shareData);
+});
+```
+
+## [Number.prototype.toString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
+
+`toString` 方法返回指定数字的字符串表示形式。
+
+### 用例
+
+- 获取数字的 unicode 码
+
+### 例子
+
+```js
+let s = "你";
+let codePoint = s.charCodeAt(0);
+console.log(codePoint); // 20320
+let hex = codePoint.toString(16); // to hex format
+console.log(hex); // 4f60
+console.log(String.fromCharCode("0x4f60", 20320)); // 你你
+console.log("\u4f60"); // 你
+```
+
+## [JSON.stringify(value[, replacer[, space]])](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+
+`JSON.stringify` 方法将 JavaScript 值转换为 JSON 字符串。
+
+### 用例
+
+- 使用 `replacer` 参数替换或过滤值，以避免需要事先对原始数据进行操作
+- 使用 `space` 参数美化输出
+
+### 例子
+
+```js
+// Replacer is a function - apply replacer before stringify the value
+JSON.stringify(
+  {
+    a: 4,
+    b: [3, 5, "hello"],
+  },
+  (key, val) => {
+    if (typeof val === "number") {
+      return val * 2;
+    }
+    return val;
+  }
+); //{"a":8,"b":[6,10,"hello"]}
+```
+
+```js
+// Replacer is an array - use replacer as a white list to filter the keys
+JSON.stringify(
+  {
+    a: 4,
+    b: {
+      a: 5,
+      d: 6,
+    },
+    c: 8,
+  },
+  ["a", "b"]
+); //{"a":4,"b":{"a":5}}
+```
+
+```js
+JSON.stringify(
+  {
+    a: [3, 4, 5],
+    b: "hello",
+  },
+  null,
+  "|--\t"
+);
+/**
+{
+|--	"a": [
+|--	|--	3,
+|--	|--	4,
+|--	|--	5
+|--	],
+|--	"b": "hello"
+}
+*/
+```
+
+## [Date.prototype.getDate](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDate)
+
+根据本地时间返回指定日期的月份日期。
+
+### 用例
+
+- 获取一个月的天数
+
+### 例子
+
+```js
+// The 0th day of next month is the last day of the current month.
+function daysInMonth(year, month) {
+  let date = new Date(year, month + 1, 0);
+  return date.getDate();
+}
+
+/**
+ * Note that date month in JS starts with 0
+ */
+// How many days in March 2017
+console.log(daysInMonth(2017, 2)); // 31
+// How many days in Feb 2017
+console.log(daysInMonth(2017, 1)); // 28
+// How many days in Feb 2016
+console.log(daysInMonth(2016, 1)); // 29
+```

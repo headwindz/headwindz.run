@@ -3,5 +3,7 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "module": "Node16",
+    "lib": ["es6", "dom"], // Include "es6" or later
   }
 }

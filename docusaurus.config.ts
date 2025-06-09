@@ -41,19 +41,16 @@ const config = {
     ({
       navbar: {
         title: 'headwindz',
-        logo: {
-          alt: 'headwindz',
-          src: 'img/profile.jpeg',
-        },
         items: [
           // Link to blogs
           {to: '/blog', label: 'Blogs', position: 'left'},
           // Link to Snippets
-          {
-            type: 'doc',
-            position: 'left',
-            label: 'Snippets',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'd',
+          //   position: 'left',
+          //   label: 'Snippets',
+          // },
         ],
       },
       footer: {

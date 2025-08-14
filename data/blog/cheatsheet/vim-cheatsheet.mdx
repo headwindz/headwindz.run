@@ -1,0 +1,65 @@
+---
+title: My Vim cheatsheet
+date: 2023-06-23
+summary: Most helpful Vim commands
+tags: [cheatsheet]
+---
+
+## Movement
+
+- `gg`: the beginning of the file
+- `G`: the end of the file
+- `0`: the beginning of the line
+- `^`: the first non-blank character of the line
+- `$`: the end of the line
+- `w`: next word
+- `b`: previous word
+- `e`: end of word
+
+## Insert -> insert mode
+
+- `I`: insert at the beginning of the line
+- `A`: insert at the end of the line
+- `o`: insert a new line below the current line
+- `O`: insert a new line above the current line
+
+## Actions
+
+- `d`: delete
+- `c`: change
+- `y`: copy
+- `v`: enter visual mode
+
+## Motions
+
+- `i{object}`: inner object(inside)
+- `a{object}`: outer object(around)
+
+## Text objects
+
+- `w`: word
+- `b`: bracket (or `(`, `{`, `[`, `<`)
+- `t`: tag
+- `q`: quote (or `'`, `"`, ```)
+
+## Return to normal mode
+
+- Esc
+- Ctrl + [
+
+## Miscellaneous
+
+- `gd`: go to definition
+- `f<char>`: find character
+
+### Move to other end of marked area Visual mode
+
+Press `o` at visual mode
+
+### Change case in Vim
+
+Select the text then:
+
+- `U` for uppercase
+- `u` for lowercase
+- `~` for toggle case

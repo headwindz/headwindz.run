@@ -1,0 +1,65 @@
+---
+title: All you need to know about third party cookies
+date: 2023-08-05
+summary: Third party cookies
+tags: [web]
+---
+
+## What are third-party cookies
+
+A cookie is associated with a domain. If this domain is the same as the domain of the page you are on, the cookie is called a first-party cookie. If the domain is different, it is a third-party cookie.
+
+You can view the first-party cookies on chrome by following the procedure: Open dev console -> `Application Tab` -> `Storage` -> `Cookies`.
+
+## Context where we need third-party cookies
+
+A cross-origin request where CORS is used.
+
+### `OPTIONS` request
+
+A CORS preflight request is a CORS request that checks to see if the CORS protocol is understood and a server is aware using specific methods and headers.
+
+It is an OPTIONS request, using three HTTP request headers: Access-Control-Request-Method, Access-Control-Request-Headers, and the Origin header.
+
+A preflight request is automatically issued by a browser and in normal cases. It appears when request is qualified as "to be preflighted" and omitted for simple requests.
+
+## Cookies attributes
+
+### httpOnly
+
+Use the `HttpOnly` attribute to prevent access to cookie values via JavaScript. It's a way of preventing XSS attack.
+
+### Domain
+
+The `Domain` attribute specifies which hosts are allowed to receive the cookie. If unspecified, it defaults to the same origin that set the cookie, excluding subdomains. If Domain is specified, then subdomains are always included.
+
+### Secure
+
+Cookies are only set on https.
+
+### Same-Site
+
+The `SameSite` attribute lets servers specify whether/when cookies are sent with cross-origin requests (where Site is defined by the registrable domain), which provides some protection against cross-site request forgery attacks (CSRF).
+
+It takes three possible values: Strict, Lax, and None. With `Strict`, the cookie is sent only to the same site as the one that originated it; `Lax` is similar, except that cookies are sent when the user navigates to the cookie's origin site, for example, by following a link from an external site; `None` specifies that cookies are sent on both originating and cross-site requests, but only in secure contexts (i.e. if SameSite=None then the Secure attribute must also be set).
+
+## Requirements for third party cookies to be sent
+
+1. Browser settings should support third party cookies to be set. For Chrome, check the setting through the path: settings -> privacy and security -> Cookies and other site data -> Allow all cookies
+2. Server correctly sets the `Same-Site` attirbute in the `Set-Cookie` response header,
+3. Set `Access-Control-Allow-Credentails: true` in the `OPTIONS` prefilight request.
+4. Client should explicitly includes the credentials in the request.
+
+### Fetch
+
+```js
+fetch('https://example.com', {
+  credentials: 'include' | 'same-origin' | 'omit',
+})
+```
+
+### Axios
+
+```js
+axios.defaults.withCredentials = true
+```

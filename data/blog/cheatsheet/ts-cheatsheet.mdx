@@ -1,0 +1,98 @@
+---
+title: My typescript cheatsheet
+date: 2023-05-01
+summary: Most helpful typescript techniques
+tags: [cheatsheet]
+---
+
+# keyof
+
+The `keyof` operator takes an object type and produces a string or numeric literal union of its keys.
+
+For example, it can be used to create a more readable and maintainable type for an object:
+
+```ts
+interface IUser {
+  name: string
+  age: number
+}
+
+type UserKeys = keyof IUser // "name" | "age"
+```
+
+Use the `keyof` operator to create more type-safe functions
+
+```ts
+function getValue<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key]
+}
+let user: User = { name: 'Mike', age: 18 }
+getValue(user, 'name') // John
+getValue(user, 'gender') // Error thrown
+```
+
+# Exclude
+
+`Exclude` utility type can be used to remove properties from an object type
+
+```ts
+interface IUser {
+  name: string
+  age: number
+}
+type UserWithoutAge = Exclude<User, 'age'>
+
+type T0 = Exclude<'a' | 'b' | 'c', 'a'> // "b" | "c"
+```
+
+Official `Exclude` implementation
+
+```ts
+type Exclude<T, U> = T extends U ? never : T
+```
+
+# ReturnType
+
+Grab the type returned from a function
+
+```ts
+const sum = (a: number, b: number) => a + b
+
+type SumResult = ReturnType<typeof sum> // number
+```
+
+# Await
+
+`Awaited` type can be used unwrap the promise and get the type of what the promise resolves to
+
+```ts
+const sum = (a: number, b: number) => a + b
+
+type SumResult = Awaited<ReturnType<typeof sum>> // number
+```
+
+# Generic
+
+```ts
+function toLabelValue<T, LabelKey extends keyof T, ValueKey extends keyof T>(
+  labelKey: LabelKey,
+  valueKey: ValueKey,
+  obj: T
+) {
+  return {
+    label: obj[labelKey],
+    value: obj[valueKey],
+  }
+}
+
+interface Lib {
+  id: number
+  name: string
+  isPublic: boolean
+}
+
+const lib = { id: 1, name: 'hi', isPublic: true }
+
+// type: { label: string, value: number }
+const labelValue = toLabelValue('name', 'id', lib)
+```

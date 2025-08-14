@@ -18,22 +18,24 @@ interface LayoutProps {
 
 export default function PostLayout({ content, next, prev, children }: LayoutProps) {
   const { path, slug, date, title } = content
+  const basePath = path.split('/')[0]
 
   return (
     <SectionContainer>
       <ScrollTopAndComment />
+      <div className="pt-4 xl:pt-8">
+        <Link
+          href={`/${basePath}`}
+          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+          aria-label="Back to the blog"
+        >
+          &larr; Back to the blog
+        </Link>
+      </div>
       <article>
         <div>
           <header>
             <div className="space-y-1 border-b border-gray-200 pb-10 text-center dark:border-gray-700">
-              <dl>
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                  </dd>
-                </div>
-              </dl>
               <div>
                 <PageTitle>{title}</PageTitle>
               </div>

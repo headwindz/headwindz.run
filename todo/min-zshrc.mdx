@@ -1,0 +1,208 @@
+> Minimum setting from zsh theme and plugins, keep it as no access to open source inside intranet
+
+# honukai-theme: https://github.com/oskarkrawczyk/honukai-iterm-zsh?tab=readme-ov-file
+
+```sh
+# Machine name.
+function box_name {
+    [ -f ~/.box-name ] && cat ~/.box-name || echo $HOST
+}
+
+# Directory info.
+local current_dir='${PWD/#$HOME/~}'
+
+# VCS
+YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}on%{$reset_color%} "
+YS_VCS_PROMPT_PREFIX2=":%{$fg[cyan]%}"
+YS_VCS_PROMPT_SUFFIX="%{$reset_color%}"
+YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}✖︎"
+YS_VCS_PROMPT_CLEAN=" %{$fg[green]%}●"
+
+# Git info.
+local git_info='$(git_prompt_info)'
+ZSH_THEME_GIT_PROMPT_PREFIX="${YS_VCS_PROMPT_PREFIX1}git${YS_VCS_PROMPT_PREFIX2}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
+ZSH_THEME_GIT_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
+ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
+
+# HG info
+local hg_info='$(ys_hg_prompt_info)'
+ys_hg_prompt_info() {
+	# make sure this is a hg dir
+	if [ -d '.hg' ]; then
+		echo -n "${YS_VCS_PROMPT_PREFIX1}hg${YS_VCS_PROMPT_PREFIX2}"
+		echo -n $(hg branch 2>/dev/null)
+		if [ -n "$(hg status 2>/dev/null)" ]; then
+			echo -n "$YS_VCS_PROMPT_DIRTY"
+		else
+			echo -n "$YS_VCS_PROMPT_CLEAN"
+		fi
+		echo -n "$YS_VCS_PROMPT_SUFFIX"
+	fi
+}
+
+# Prompt format: \n # USER at MACHINE in DIRECTORY on git:BRANCH STATE [TIME] \n $
+PROMPT="
+%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
+%{$fg[cyan]%}michael \
+%{$fg[white]%}at \
+%{$fg[green]%}$(box_name) \
+%{$fg[white]%}in \
+%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+${hg_info}\
+${git_info} \
+%{$fg[white]%}[%*]
+%{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
+
+if [[ "$USER" == "root" ]]; then
+PROMPT="
+%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
+%{$bg[yellow]%}%{$fg[cyan]%}%n%{$reset_color%} \
+%{$fg[white]%}at \
+%{$fg[green]%}$(box_name) \
+%{$fg[white]%}in \
+%{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
+${hg_info}\
+${git_info} \
+%{$fg[white]%}[%*]
+%{$terminfo[bold]$fg[red]%}→ %{$reset_color%}"
+fi
+```
+
+# Git-plugin
+
+```sh
+# Git version checking
+autoload -Uz is-at-least
+git_version="${${(As: :)$(git version 2>/dev/null)}[3]}"
+
+#
+# Functions
+#
+# The name of the current branch
+# Back-compatibility wrapper for when this function was defined here in
+# the plugin, before being pulled in to core lib/git.zsh as git_current_branch()
+# to fix the core -> git plugin dependency.
+function current_branch() {
+  git_current_branch
+}
+
+# Pretty log messages
+function _git_log_prettily(){
+  if ! [ -z $1 ]; then
+    git log --pretty=$1
+  fi
+}
+compdef _git _git_log_prettily=git-log
+
+# Warn if the current branch is a WIP
+function work_in_progress() {
+  command git -c log.showSignature=false log -n 1 2>/dev/null | grep -q -- "--wip--" && echo "WIP!!"
+}
+
+# Check if main exists and use instead of master
+function git_main_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local ref
+  for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk}; do
+    if command git show-ref -q --verify $ref; then
+      echo ${ref:t}
+      return
+    fi
+  done
+  echo master
+}
+
+# Check for develop and similarly named branches
+function git_develop_branch() {
+  command git rev-parse --git-dir &>/dev/null || return
+  local branch
+  for branch in dev devel development; do
+    if command git show-ref -q --verify refs/heads/$branch; then
+      echo $branch
+      return
+    fi
+  done
+  echo develop
+}
+
+#
+# Aliases
+# (sorted alphabetically)
+#
+
+alias gaa='git add --all'
+alias gcmsg='git commit -m'
+alias gd='git diff'
+
+function ggf() {
+  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  git push --force origin "${b:=$1}"
+}
+compdef _git ggf=git-checkout
+function ggfl() {
+  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  git push --force-with-lease origin "${b:=$1}"
+}
+compdef _git ggfl=git-checkout
+
+function ggl() {
+  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+    git pull origin "${*}"
+  else
+    [[ "$#" == 0 ]] && local b="$(git_current_branch)"
+    git pull origin "${b:=$1}"
+  fi
+}
+compdef _git ggl=git-checkout
+
+function ggp() {
+  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+    git push origin "${*}"
+  else
+    [[ "$#" == 0 ]] && local b="$(git_current_branch)"
+    git push origin "${b:=$1}"
+  fi
+}
+compdef _git ggp=git-checkout
+
+function ggpnp() {
+  if [[ "$#" == 0 ]]; then
+    ggl && ggp
+  else
+    ggl "${*}" && ggp "${*}"
+  fi
+}
+compdef _git ggpnp=git-checkout
+
+function ggu() {
+  [[ "$#" != 1 ]] && local b="$(git_current_branch)"
+  git pull --rebase origin "${b:=$1}"
+}
+compdef _git ggu=git-checkout
+
+alias gl='git pull'
+alias gp='git push'
+alias gst='git status'
+
+# use the default stash push on git 2.13 and newer
+is-at-least 2.13 "$git_version" \
+  && alias gsta='git stash push' \
+  || alias gsta='git stash save'
+
+function grename() {
+  if [[ -z "$1" || -z "$2" ]]; then
+    echo "Usage: $0 old_branch new_branch"
+    return 1
+  fi
+
+  # Rename branch locally
+  git branch -m "$1" "$2"
+  # Rename branch in origin remote
+  if git push origin :"$1"; then
+    git push --set-upstream origin "$2"
+  fi
+}
+
+unset git_version
+```

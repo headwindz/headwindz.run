@@ -1,0 +1,84 @@
+---
+title: user-select and pointer-events css properties
+tags: [web]
+date: 2021-01-03
+summary: Two useful CSS properties I wish I knew earlier
+---
+
+# user-select — control text selection
+
+The `user-select` css property defines whether the text of an element can be selected by the user.
+
+Common values:
+
+- `auto` — default behavior (browser decides).
+- `text` — the element's text is selectable.
+- `none` — disables text selection.
+- `contain` — selection is limited to the element's contents.
+
+Use cases:
+
+- Improving UX in components where text selection is undesirable. E.g. buttons, interactive widgets, avoid copy by disabling selection for copyright protection.
+- Provide a single-click "select all" behavior for text fields or code blocks.
+
+Example — basic usage:
+
+```html
+<p>Normal selection</p>
+<p class="select-none">None selection</p>
+<p class="select-all">All selection</p>
+```
+
+```css
+.select-none {
+  user-select: none;
+}
+
+.select-all {
+  user-select: all;
+}
+```
+
+[code sample](https://codesandbox.io/s/use-select-lp7u9)
+
+# pointer-events — control pointer targeting
+
+The `pointer-events` css property controls whether an element can be the target of mouse/touch/pointer events. On html/css the most commonly used values are `auto` (default) and `none` (ignore pointer events)
+
+Example — basic usage:
+
+```html
+<ul>
+  <li><a href="google.com">Google</a></li>
+  <li><a href="google.com" style="pointer-events:none">Google</a></li>
+</ul>
+```
+
+[code sample](https://codesandbox.io/s/point-events-6gp7x?file=/index.html)
+
+When `pointer-events: none` is applied the element won't receive pointer events and clicks will "pass through" to whatever is underneath (if any). This is handy when building overlays or decorative elements that shouldn't block interaction.
+
+Overlay example — allow clicks through a translucent layer:
+
+```html
+<div class="overlay">I won't block clicks</div>
+<button onclick="alert('clicked')">Click me</button>
+```
+
+```css
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none; /* allow clicks to reach the button */
+}
+```
+
+Important notes:
+
+- `pointer-events: none` also disables pointer-based focus for some elements (links, buttons). That means keyboard users may still be able to focus the element — test for accessibility.
+- For interactive elements you generally want to hide them visually or disable them semantically (`disabled` attribute) instead of only using pointer-events.
+
+# Conclusion
+
+To conclude, both `user-select` and `pointer-events` are powerful CSS properties that can enhance user experience by controlling text selection and pointer interactions. They are especially useful in interactive web applications where you want to fine-tune how users interact with different elements on the page.

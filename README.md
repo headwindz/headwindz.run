@@ -1,6 +1,8 @@
-# Building my Blog
+# My personal blog
 
-In Building...
+This blog serves as a platform for me to share my thoughts, experiences, and projects related to frontend development and web3 technologies.
+
+https://headwindz-run.vercel.app/
 
 ## Attributes
 

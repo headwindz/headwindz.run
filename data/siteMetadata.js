@@ -1,21 +1,16 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'crypto.web.headwindz',
+  title: 'web3.headwindz',
   author: 'Michael Zheng',
   headerTitle: 'Headwindz',
-  description: 'My blog',
+  description: 'My personal blog',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://headwindz-run.vercel.app/',
   siteRepo: 'https://github.com/headwindz/headwindz.run',
   // socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
-  mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'zhengjianhua.michael@gmail.com',
   github: 'https://github.com/headwindz',
-  // x: 'https://twitter.com/x',
-  // twitter: 'https://twitter.com/Twitter',
-  // linkedin: 'https://www.linkedin.com',
-  // medium: 'https://medium.com',
+  x: 'https://x.com/headwindzzz',
   locale: 'en-US',
   // set to true if you want a navbar fixed to the top
   stickyNav: false,

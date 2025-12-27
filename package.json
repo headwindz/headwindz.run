@@ -24,7 +24,7 @@
     "gray-matter": "^4.0.2",
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "2.0.1",
-    "next": "15.2.4",
+    "next": "15.2.8",
     "next-contentlayer2": "0.5.5",
     "next-themes": "^0.4.6",
     "pliny": "0.4.1",

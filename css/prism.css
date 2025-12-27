@@ -1,5 +1,13 @@
 @reference "./tailwind.css";
 
+.prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::before {
+  content: none;
+}
+
+.prose :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *))::after {
+  content: none;
+}
+
 /**
  * CSS Styles for code highlighting.
  * Feel free to customize token styles 

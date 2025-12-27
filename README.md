@@ -2,7 +2,7 @@
 
 This blog serves as a platform for me to share my thoughts, experiences, and projects related to frontend development and web3 technologies.
 
-https://headwindz-run.vercel.app/
+https://headwindz.me
 
 ## Attributes
 

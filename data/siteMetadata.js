@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'My personal blog',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://headwindz-run.vercel.app/',
+  siteUrl: 'https://headwindz.me',
   siteRepo: 'https://github.com/headwindz/headwindz.run',
   // socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   github: 'https://github.com/headwindz',

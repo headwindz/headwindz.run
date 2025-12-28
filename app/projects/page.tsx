@@ -1,35 +1,35 @@
 import projectsData from '@/data/projectsData'
-import Card from '@/components/Card'
+import Card from '@/components/ProjectCard'
 import { genPageMetadata } from 'app/seo'
 
 export const metadata = genPageMetadata({ title: 'Projects' })
 
 export default function Projects() {
   return (
-    <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+    <div className="mx-auto px-4 sm:px-6 xl:px-0">
+      <div className="space-y-8 pt-16 pb-12">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl dark:text-gray-100">
             Projects
           </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            Showcase your projects with a hero image (16 x 9)
+          <p className="font-mono text-sm tracking-wider text-gray-500 dark:text-gray-400">
+            Things I BUIDL!
           </p>
         </div>
-        <div className="container py-12">
-          <div className="-m-4 flex flex-wrap">
-            {projectsData.map((d) => (
+
+        <div className="divide-y divide-gray-200 dark:divide-gray-800">
+          {projectsData.map((project) => (
+            <div key={project.title} className="py-12">
               <Card
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
+                title={project.title}
+                description={project.description}
+                imgSrc={project.imgSrc}
+                href={project.href}
               />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }

@@ -8,6 +8,12 @@
   content: none;
 }
 
+.react-demo pre {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /**
  * CSS Styles for code highlighting.
  * Feel free to customize token styles 

@@ -14,6 +14,7 @@ import {
   remarkImgToJsx,
   extractTocHeadings,
 } from 'pliny/mdx-plugins/index.js'
+import remarkDemo from './lib/remark-demo.mjs'
 // Rehype packages
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -150,6 +151,7 @@ export const Authors = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'data',
   documentTypes: [Blog, Authors],
+  disableImportAliasWarning: true,
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -159,6 +161,7 @@ export default makeSource({
       remarkMath,
       remarkImgToJsx,
       remarkAlert,
+      remarkDemo,
     ],
     rehypePlugins: [
       rehypeSlug,

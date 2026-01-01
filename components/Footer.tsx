@@ -27,7 +27,6 @@ export default function Footer() {
           <Link href="/">{siteMetadata.title}</Link>
         </div>
         <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <span>build with Next.js + tailwindcss + Vercel - </span>
           <Link href={siteMetadata.siteRepo} className="hover:text-primary-400 underline">
             View Source
           </Link>

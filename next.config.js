@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { withContentlayer } = require('next-contentlayer2')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -94,6 +95,14 @@ module.exports = () => {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       })
+
+      // Watch demos directory for changes to trigger hot reload
+      if (options.dev && !options.isServer) {
+        config.watchOptions = {
+          ...config.watchOptions,
+          ignored: ['**/node_modules', '**/.git'],
+        }
+      }
 
       return config
     },

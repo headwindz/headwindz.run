@@ -1,0 +1,167 @@
+---
+title: React `key` practices
+tags: [react]
+date: 2021-05-22
+summary: Best practices of using `key` prop in React, including what to use as key and how key affects component unmounting.
+---
+
+# Understanding React key
+
+> Keys give the react elements a stable `identity`
+
+## Warning in array without key
+
+```jsx
+import React from 'react'
+
+function App() {
+  const persons = ['mike', 'jason', 'sharky']
+  return (
+    <ul>
+      {persons.map((p) => {
+        return <li>{p}</li>
+      })}
+    </ul>
+  )
+}
+```
+
+React will throw a warning with the code above:
+`Warning: Each child in a list should have a unique "key" prop.`
+
+## What keys to use?
+
+Keys should be `unique` and `stable`
+
+### Index ? Maybe, but only `under some circumstances`
+
+Array index is unique across an array.
+
+```jsx
+import React, { useState } from 'react'
+
+function App() {
+  const persons = ['mike', 'jason', 'sharky']
+  return (
+    <ul>
+      {persons.map((p, index) => {
+        return <li key={index}>{p}</li>
+      })}
+    </ul>
+  )
+}
+```
+
+However, if the order/number of items may change, array index is NOT `stable`.
+
+[Index Key Demo](demo://react-key-practices/array-index-as-key.tsx)
+
+**Try it yourself**: Tick `mike` and then click the add button. You'll see the check status incorrectly stays with the first position instead of following `mike`.
+
+### `Stable` key
+
+Usually we will have a unique and stable `id` like property for each record from backend/database.
+
+[Stable Key](demo://react-key-practices/stable-key-demo.tsx)
+
+**Try it yourself**: Now tick `mike` and click add. The checkbox correctly stays with `mike` because each person has a stable `id` as the key.
+
+## Common Key Anti-patterns
+
+### ❌ Random values or timestamps
+
+```jsx
+// DON'T DO THIS
+{
+  items.map((item) => <div key={Math.random()}>{item.name}</div>)
+}
+
+// OR THIS
+{
+  items.map((item) => <div key={Date.now()}>{item.name}</div>)
+}
+```
+
+These generate new keys on every render, forcing React to unmount and remount all elements unnecessarily. This destroys state and kills performance.
+
+### ❌ Duplicate keys
+
+```jsx
+// BAD: Multiple items with same key
+{
+  items.map((item) => <div key={item.category}>{item.name}</div>)
+}
+```
+
+Duplicate keys confuse React's reconciliation algorithm and can cause incorrect updates or lost state.
+
+## Advanced Key Concepts
+
+### Keys in fragments
+
+When returning multiple elements from a component or mapping an array to fragments, you need to add keys to the fragments:
+
+```jsx
+function Glossary({ items }) {
+  return (
+    <dl>
+      {items.map((item) => (
+        <React.Fragment key={item.id}>
+          <dt>{item.term}</dt>
+          <dd>{item.description}</dd>
+        </React.Fragment>
+      ))}
+    </dl>
+  )
+}
+```
+
+### Keys only need to be unique among siblings
+
+Keys don't need to be globally unique—only unique among their siblings:
+
+```jsx
+function Blog() {
+  const posts = [{ id: 1, title: 'Post 1' }]
+  const comments = [{ id: 1, text: 'Comment 1' }] // Same id is fine!
+
+  return (
+    <>
+      {posts.map((post) => (
+        <Post key={post.id} {...post} />
+      ))}
+      {comments.map((comment) => (
+        <Comment key={comment.id} {...comment} />
+      ))}
+    </>
+  )
+}
+```
+
+### Use key to unmount component
+
+Use case: I have a select and input component. Each the select option changes, reset the input to default state.
+
+[Key Unmount Demo](demo://react-key-practices/key-unmount-demo.tsx)
+
+**Try it yourself**: Type something in both `inputs`, then change the `select`. The second `input` (with `key`) resets because React unmounts and remounts it when the key changes.
+
+### Performance implications
+
+Keys are critical for React's reconciliation performance. With proper keys, React can:
+
+- Efficiently reorder existing DOM nodes instead of recreating them
+- Preserve component state when items move in a list
+- Skip unnecessary re-renders of unchanged items
+
+Without proper keys, React may needlessly destroy and recreate DOM nodes, losing state and degrading performance.
+
+## Conclusion
+
+- `key` is a unique identifier for react elements
+- `key` should be `unique` and `stable`. A react element with a different `key` in different render phases will be considered a different element. The old one will be unmounted and a new one is created.
+- Only use array indices as keys when the number/order of array items are unchanged across the whole app lifecycle.
+- Always prefer to use backend/database unique identifier id-like properties as `key`
+- Never use random values, timestamps, or non-stable data as keys
+- Keys only need to be unique among siblings, not globally
+- Proper keys are essential for optimal reconciliation performance

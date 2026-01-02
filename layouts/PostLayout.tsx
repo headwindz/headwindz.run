@@ -150,7 +150,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                   </div>
                 )}
               </div>
-              <div className="pt-4 xl:pt-8">
+              <div className="pt-4 pb-4 xl:pt-8">
                 <Link
                   href={`/${basePath}`}
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"

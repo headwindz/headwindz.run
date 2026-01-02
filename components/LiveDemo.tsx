@@ -4,6 +4,7 @@ import Pre from 'pliny/ui/Pre'
 import ArrayIndexAsKey from '@/demos/react-key-practices/array-index-as-key'
 import StableKeyDemo from '@/demos/react-key-practices/stable-key-demo'
 import KeyUnmountDemo from '@/demos/react-key-practices/key-unmount-demo'
+import FixedPositionDemo from '@/demos/fixed-position/fixed'
 import { unified } from 'unified'
 import rehypeParse from 'rehype-parse'
 import rehypePrismPlus from 'rehype-prism-plus'
@@ -19,6 +20,7 @@ const demoComponents: Record<string, React.ComponentType> = {
   'react-key-practices/array-index-as-key.tsx': ArrayIndexAsKey,
   'react-key-practices/stable-key-demo.tsx': StableKeyDemo,
   'react-key-practices/key-unmount-demo.tsx': KeyUnmountDemo,
+  'fixed-position/fixed.tsx': FixedPositionDemo,
 }
 
 const LiveDemo = async ({ code: initialCode, demoPath }: LiveDemoProps) => {

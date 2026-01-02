@@ -1,0 +1,99 @@
+---
+title: CSS position fixed
+tags: [web, css]
+date: 2021-12-15
+summary: CSS fixed position is not always relative to viewport. It becomes relative to the closest ancestor with transform, perspective, filter, will-change, contain, or backdrop-filter properties set.
+---
+
+# `fixed` position
+
+For a long time I believed that an element with `position: fixed` would always be positioned relative to the `viewport`. However, this is not always the case, as outlined in the MDN documentation:
+
+> It is positioned relative to the initial containing block established by the viewport, except when one of its ancestors has a transform, perspective, or filter property set to something other than none
+
+Simply put, if any ancestor has certain CSS properties set, that ancestor becomes the [containing block](https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block) instead of the viewport.
+
+## Properties that create a new containing block
+
+The following properties, when set to values other than their defaults, will create a new containing block for fixed-positioned descendants:
+
+- **`transform`** - Any value except `none` (e.g., `transform: translateX(0)`)
+- **`perspective`** - Any value except `none`
+- **`filter`** - Any value except `none` (e.g., `filter: blur(0)`)
+- **`will-change`** - When set to `transform`, `perspective`, or `filter`
+- **`contain`** - Values of `layout`, `paint`, or a combination including either
+- **`backdrop-filter`** - Any value except `none`
+
+[fixed](demo://fixed-position/fixed.tsx)
+
+**Try it yourself**: Scroll the page and observe the fixed box. With the checkbox enabled, it's positioned relative to the wrapper box (with `transform: translateX(0)`) rather than the viewport. Toggle the checkbox to see the difference.
+
+## Why this happens: The CSS specification
+
+This behavior exists because these properties create a **new stacking context** and force the browser to establish a new containing block. The browser needs to:
+
+1. Apply transformations/filters in a specific rendering order
+2. Create a new coordinate system for the transformed/filtered content
+3. Maintain proper layering and paint order
+
+When an element creates a stacking context, fixed-positioned descendants are rendered within that context, making them relative to the transformed ancestor instead of the viewport.
+
+## Practical use cases
+
+### 1. Containing third-party components
+
+When using a third-party plugin/component with `position: fixed` but you want it positioned relative to your container rather than the viewport. If you can't modify the source code, wrap it with a container that has `transform: translateX(0)`:
+
+```css
+.wrapper {
+  transform: translateX(0); /* Creates new containing block */
+}
+```
+
+### 2. Modal dialogs within containers
+
+Create modals that are fixed within a specific section of your page rather than the entire viewport:
+
+```css
+.modal-container {
+  transform: translate3d(0, 0, 0);
+  overflow: auto;
+}
+
+.modal {
+  position: fixed;
+  /* Now fixed relative to .modal-container */
+}
+```
+
+## Common pitfalls and debugging
+
+### Unexpected positioning
+
+If your fixed element isn't staying at the viewport edge, check all ancestors for:
+
+```css
+/* Any of these will break viewport-relative fixed positioning */
+.ancestor {
+  transform: scale(1);
+  filter: brightness(1);
+  will-change: transform;
+  contain: paint;
+}
+```
+
+**Debugging tip**: Use browser DevTools to inspect computed styles and search for these properties up the DOM tree.
+
+## Best practices
+
+1. **Be intentional**: Only add `transform` or similar properties when you need the containing block behavior
+2. **Document it**: Comment your CSS when intentionally creating a new containing block
+3. **Test thoroughly**: Check fixed positioning behavior at different scroll positions and viewport sizes
+
+## Alternatives
+
+If you need viewport-relative positioning despite transformed ancestors:
+
+- Use `position: sticky` if appropriate for your use case
+- Restructure your DOM to avoid transformed ancestors
+- Use portal-based solutions (React Portals, Vue Teleport) to render outside the transformed tree

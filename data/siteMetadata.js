@@ -5,7 +5,7 @@ const siteMetadata = {
   headerTitle: 'Headwindz',
   description: 'My personal blog',
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'dark', // system, dark or light
   siteUrl: 'https://headwindz.me',
   siteRepo: 'https://github.com/headwindz/headwindz.run',
   // socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,

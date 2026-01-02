@@ -1,0 +1,202 @@
+---
+title: Nginx Buffer - Fixing ERR_CONTENT_LENGTH_MISMATCH
+tags: [nginx, web server, devops]
+date: 2018-07-02
+summary: How to fix nginx ERR_CONTENT_LENGTH_MISMATCH error caused by permission problems with proxy_temp buffer directory. Includes debugging steps and multiple solutions.
+---
+
+## Background
+
+I've been using Nginx as a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) for my daily development work. After upgrading Nginx, it stopped serving large files correctly: a `vendor.js` file built from webpack wasn't being served properly. Chrome console showed:
+
+```bash
+GET http://nginx.example.com/dist/js/vendor.js net::ERR_CONTENT_LENGTH_MISMATCH
+```
+
+### Initial observations
+
+- Chrome DevTools Network tab shows `vendor.js` request with status code 200
+- Response headers appear correct, but no content preview in Chrome DevTools
+- Response Content-Length header matches actual file size (4.6MB)
+
+```bash
+# ls -l : get the size in bytes
+-rw-r--r--  1  michaelzheng  staff   4844863 Jul  2 17:00 vendor.js
+
+# ls -lh : get the size in human readable format
+-rw-r--r--  1  michaelzheng  staff   4.6M Jul  2 17:00 vendor.js
+```
+
+- Loading `vendor.js` directly via browser or `curl` works perfectly
+
+## Understanding Nginx Proxy Buffering
+
+Before debugging, it's important to understand how Nginx proxy buffering works:
+
+### What is proxy buffering?
+
+When Nginx acts as a reverse proxy, it can buffer responses from the upstream server before sending them to the client. This allows Nginx to:
+
+1. **Free up upstream connections faster** - The upstream can move on to other requests
+2. **Handle slow clients** - Nginx buffers the response and sends it at the client's pace
+3. **Optimize throughput** - Reduces number of system calls and improves overall performance
+
+### When buffering is used
+
+Nginx uses buffering when:
+
+- `proxy_buffering` is `on` (default)
+- Response size exceeds `proxy_buffer_size` + `proxy_buffers` combined capacity
+- Large responses (like `vendor.js` bundles) that don't fit in memory buffers
+
+### Buffer hierarchy
+
+Nginx uses a two-tier buffering system:
+
+1. **Memory buffers** - Controlled by `proxy_buffers` (fast, limited)
+2. **Disk buffers** - Controlled by `proxy_temp_path` (slower, larger capacity)
+
+When memory buffers are full, Nginx writes overflow data to temporary files in `proxy_temp_path`.
+
+## Debugging Steps
+
+### 1. Locate Nginx configuration
+
+```bash
+nginx -t
+# nginx: the configuration file /usr/local/etc/nginx/nginx.conf syntax is ok
+# nginx: configuration file /usr/local/etc/nginx/nginx.conf test is successful
+```
+
+This command shows the config file location and validates syntax.
+
+### 2. Find error log location
+
+Check `nginx.conf` for the `error_log` directive. E.g.
+
+```nginx
+error_log /usr/local/var/log/nginx/error.log warn;
+```
+
+### 3. Check error logs
+
+```bash
+tail -f /usr/local/var/log/nginx/error.log
+```
+
+The critical error revealed:
+
+```bash
+2018/07/02 22:29:27 [crit] 14586#0: *3641 open() "/usr/local/var/run/nginx/proxy_temp/1/08/0000000081" failed
+(13: Permission denied) while reading upstream, client: 127.0.0.1, server: nginx.example.com,
+request: "GET /dist/js/vendor.js HTTP/1.1", upstream: "http://127.0.0.1:8080/dist/js/vendor.js",
+host: "nginx.example.com", referrer: "http://nginx.example.com/testabc"
+```
+
+**Key insight**: The file was too large for memory buffers, so Nginx tried to write to `proxy_temp` but lacked permissions.
+
+### 4. Verify Nginx process owner
+
+```bash
+ps aux | grep nginx
+# nobody   14586  0.0  0.1  ...  nginx: worker process
+# root     14585  0.0  0.0  ...  nginx: master process
+```
+
+The worker process runs as `nobody`, which needs write access to `proxy_temp`.
+
+### 5. Check directory permissions
+
+```bash
+ls -la /usr/local/var/run/nginx/proxy_temp
+# drwx------  2 root  wheel  64 Jul  2 17:00 proxy_temp
+```
+
+The directory is owned by `root` with `700` permissions, preventing `nobody` from writing.
+
+## Solutions
+
+### Solution 1: Fix directory permissions (Recommended)
+
+Grant the Nginx worker process owner write access to the buffer directory:
+
+```bash
+# Change owner to nginx worker user
+sudo chown -R nobody:admin /usr/local/var/run/nginx/proxy_temp
+
+# Or set broader permissions (less secure)
+sudo chmod 755 /usr/local/var/run/nginx/proxy_temp
+```
+
+**Pros:**
+
+- Maintains optimal performance with buffering enabled
+- Allows Nginx to handle large files efficiently
+- No configuration changes needed
+
+**Cons:**
+
+- May be reset after Nginx upgrades
+- Requires root access
+
+### Solution 2: Disable proxy buffering
+
+Add to your `nginx.conf` or server block:
+
+```nginx
+location / {
+  proxy_pass http://upstream_server;
+  proxy_buffering off;
+}
+```
+
+**Pros:**
+
+- Eliminates permission issues entirely
+- Simpler configuration
+- Lower memory usage
+
+**Cons:**
+
+- Slower performance for large responses
+- Upstream connections held open longer
+- Not recommended for production with slow clients
+
+### Solution 3: Change buffer directory location
+
+Specify a custom path where Nginx has permissions:
+
+```nginx
+http {
+  proxy_temp_path /var/tmp/nginx/proxy_temp;
+}
+```
+
+Create and set permissions:
+
+```bash
+sudo mkdir -p /var/tmp/nginx/proxy_temp
+sudo chown -R nobody:admin /var/tmp/nginx/proxy_temp
+sudo chmod 755 /var/tmp/nginx/proxy_temp
+```
+
+**Pros:**
+
+- Maintains buffering performance
+- More control over buffer location
+- Can specify larger disk space
+
+**Cons:**
+
+- Requires configuration change
+- Need to ensure directory persists across reboots
+
+## Conclusion
+
+The `ERR_CONTENT_LENGTH_MISMATCH` error typically indicates Nginx couldn't complete writing the response due to permission issues with the `proxy_temp` directory. Understanding Nginx's buffering mechanism helps you choose the right solution:
+
+- **For most cases**: Fix permissions (Solution 1)
+- **For streaming/real-time**: Disable buffering (Solution 2)
+- **For complex setups**: Custom temp path (Solution 3)
+
+Always test your chosen solution under load to ensure it meets your performance requirements.
